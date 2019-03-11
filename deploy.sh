@@ -5,4 +5,6 @@ fi
 sleep 3
 
 screen -Sdm "SL" java -jar target/shiskin-library-starter.jar
+screen -S "SL" -X multiuser on
+screen -S "SL" -X acladd root
 screen -ls
