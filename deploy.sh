@@ -2,7 +2,7 @@ if ! screen -list | grep -q "SL"; then
     screen -X -S "SL" stuff "^C"
 fi
 
-sleep 5
+sleep 8
 
 screen -Sdm "SL" java -jar target/shiskin-library-starter.jar
 screen -S "SL" -X multiuser on
