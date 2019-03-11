@@ -5,5 +5,5 @@ fi
 
 sleep 1
 
-screen -c multiscreen.conf -Sdm SL java -jar target/shiskin-library-starter.jar
+screen -c multiscreen.conf -Sdm SL java -jar target/shiskin-library-starter.jar --logging.file=latest.log
 screen -ls
