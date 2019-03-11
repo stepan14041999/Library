@@ -1,10 +1,9 @@
-if ! screen -list | grep -q "SL"; then
-    screen -X -S "SL" stuff "^C"
+if screen -list | grep SL; then
+    screen -X -S SL quit
+    echo 'found old screen'
 fi
 
-sleep 8
+sleep 1
 
-screen -Sdm "SL" java -jar target/shiskin-library-starter.jar
-screen -S "SL" -X multiuser on
-screen -S "SL" -X acladd root
+screen -c multiscreen.conf -Sdm SL java -jar target/shiskin-library-starter.jar
 screen -ls
