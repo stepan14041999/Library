@@ -1,7 +1,7 @@
-package ru.kotov.nikita.library.repos;
+package ru.sstu.library.repos;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.kotov.nikita.library.entity.Role;
+import ru.sstu.library.entities.Role;
 
 public interface RoleRepo extends CrudRepository<Role,Integer> {
     Role findByName(String name);

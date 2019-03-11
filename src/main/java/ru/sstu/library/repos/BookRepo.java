@@ -1,7 +1,7 @@
-package ru.kotov.nikita.library.repos;
+package ru.sstu.library.repos;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.kotov.nikita.library.entity.Book;
+import ru.sstu.library.entities.Book;
 
 import java.util.List;
 

@@ -1,7 +1,8 @@
-package ru.kotov.nikita.library.repos;
+package ru.sstu.library.repos;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.kotov.nikita.library.entity.Image;
+
+import ru.sstu.library.entities.Image;
 
 public interface ImageRepo extends CrudRepository<Image,Integer> {
 }

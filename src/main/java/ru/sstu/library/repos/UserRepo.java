@@ -1,7 +1,7 @@
-package ru.kotov.nikita.library.repos;
+package ru.sstu.library.repos;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.kotov.nikita.library.entity.User;
+import org.springframework.security.core.userdetails.User;
 
 public interface UserRepo extends CrudRepository<User,Integer> {
     User findByLogin(String login);

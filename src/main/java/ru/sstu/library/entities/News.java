@@ -1,4 +1,4 @@
-package ru.kotov.nikita.library.entity;
+package ru.sstu.library.entities;
 
 import lombok.Data;
 
