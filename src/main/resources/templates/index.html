@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link href="../static/css/Main.css" th:href="@{/css/Main.css}" rel="stylesheet" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
@@ -9,6 +9,7 @@
 </head>
 <body>
 <header>
+
     <div class="center-block-main">
         <div class="header-top clearfix">
             <p class ="logo"><a href="#">LIBRARY</a></p>
@@ -20,8 +21,9 @@
                 <div id="search_advice_wrapper"></div>
             </div>
         <div class="login">
-            <p><a sec:authorize="isAnonymous()" th:href="@{/login}"><img src="../static/image/login.png">Войти</a></p>
+            <p><a sec:authorize="isAnonymous()" th:href="@{/login}" ><img th:src="@{image/login.png}">Войти</a></p>
         </div>
+
         </div>
         <div class="header-bottom">
             <nav>
@@ -52,7 +54,7 @@
             <h2>Последние поступления</h2>
             <div class="block-main clearfix">
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -60,7 +62,7 @@
 
                         <p class="product clearfix">
                             <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                            <span class="booking-btn"><button type="submit">ЗАБРОНИРОВАТЬ</button></span>
                         </p>
                     </div>
                 </arcticle>
@@ -288,9 +290,24 @@
 
 
 
-    </div>
+
+
+        </body>
+        </html>
+
+
+
+
+
+
+
 
     <script type="text/javascript">
+
+
+
+
+
 
 
 
