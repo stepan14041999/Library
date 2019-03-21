@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.sstu.library.entities.User;
 import ru.sstu.library.service.LibraryService;
 import ru.sstu.library.service.RegistrationService;
@@ -16,6 +17,17 @@ public class RegistrationController {
     private RegistrationService registrationService;
     @Autowired
     private BCryptPasswordEncoder encoder;
+
+    @GetMapping("/login")
+    public String getLoginPage(Model model,@RequestParam(required = false) String error){
+        model.addAttribute("error",error);
+        return "login";
+    }
+
+    @GetMapping("/registration")
+    public String getRegistrationPage(Model model){
+        return "registration";
+    }
 
     @PostMapping("/registration")
     public String addUser(User user, Model model){
