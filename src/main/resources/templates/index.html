@@ -9,6 +9,71 @@
 </head>
 <body>
 <header>
+    <!-- Авторизация -->
+    <div class="modal" id="modal-one" aria-hidden="true">
+        <form  method="post" class="ui-form">
+            <div class="modal-dialog">
+                <div class="modal-header">
+
+                    <h2>Авторизация</h2>
+
+                    <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
+                </div>
+                <p th:if="${error!=''}" th:text="${error}" id="message"></p>
+                <div class="modal-body ">
+                    <label for="login">Логин<br></label>  <input type="text" name="username" id="login" required autocomplete="off">
+                </div>
+                <div class="modal-body ">
+                    <label for="password">Пароль<br></label> <input type="password" name="password" id="password" required autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                    <p><input type="submit" value="Войти"></p>
+                    <p><a th:href="@{/recoverPass}" class="recoverPass">Забыли пароль?</a></p><!--Изменяем на "#close"-->
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- / Регистрация -->
+    <div class="modal" id="modal-two" aria-hidden="true">
+        <form  method="post" class="ui-form">
+            <div class="modal-dialog">
+                <div class="modal-header">
+
+                    <h2>Регистрация</h2>
+
+                    <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
+                </div>
+                <p th:if="${message}" id="message">Данный логин уже используется</p>
+                <div class="modal-body">
+                    <label for="password">Пароль<br></label><input type="password" name="password" id="password" pattern=".{8,}"   required title="8 символов  минимум">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="fio">Фамилия Имя Отчество<br></label> <input type="text" name="fio" id="fio" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                    <label th:if="${user==null}" for="fio1">Фамилия Имя Отчество<br></label><input type="text" name="fio" id="fio1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="email">E - mail<br></label>  <input type="email" name="email" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" required>
+                    <label for="email1" th:if="${user==null}">E - mail<br></label>  <input type="email" name="email" id="email1" th:if="${user==null}" required>
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" id="specialLabel1" for="birthday">Дата рождения<br></label> <input type="date" name="birthday" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
+                    <label id="specialLabel" for="birthday1" th:if="${user==null}">Дата рождения<br></label> <input type="date" name="birthday" th:if="${user==null}"  id="birthday1">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="phone_number">Номер телефона<br></label> <input type="number" name="phone_number" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" required title="Длина должна быть 10 цифр">
+                    <label th:if="${user==null}" for="phone_number1">Номер телефона<br></label> <input type="number" name="phone_number" th:if="${user==null}"  pattern="[0-9]{10}" id="phone_number1" required title="Длина должна быть 10 цифр">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="address">Адрес проживания<br></label> <input type="text" name="address" id="address" th:if="${user!=null}" th:value="${user.getAddress()}" required autocomplete="off">
+                    <label for="address1" th:if="${user==null}">Адрес проживания<br></label> <input type="text" name="address" id="address1" th:if="${user==null}" required autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                    <p><input type="submit" value="Зарегистрироваться"></p>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <div class="center-block-main">
         <div class="header-top clearfix">
@@ -21,7 +86,8 @@
                 <div id="search_advice_wrapper"></div>
             </div>
         <div class="login">
-            <p><a sec:authorize="isAnonymous()" th:href="@{/login}" ><img th:src="@{image/login.png}">Войти</a></p>
+            <a sec:authorize="isAnonymous()" href="#modal-one">Вход</a>
+            <a sec:authorize="isAnonymous()" href="#modal-two">Регистрация</a>
         </div>
 
         </div>
@@ -68,7 +134,7 @@
                 </arcticle>
 
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -82,7 +148,7 @@
                 </arcticle>
 
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -96,7 +162,7 @@
                 </arcticle>
 
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -122,7 +188,7 @@
             <h2>Популярное</h2>
             <div class="block-main clearfix">
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -136,7 +202,7 @@
                 </arcticle>
 
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -150,7 +216,7 @@
                 </arcticle>
 
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -164,7 +230,7 @@
                 </arcticle>
 
                 <arcticle>
-                    <img src="../static/image/123.jpg" alt="">
+                    <img th:src="@{image/123.jpg}" alt="">
                     <div class="block-main-content">
                         <h2>Название</h2>
                         <h3>Жанр</h3>
@@ -192,7 +258,7 @@
                     <div class="slider__item">
                         <div class="slider__content">
                             <div class="slider__content_header">
-                                <img class="slider__content_img" src="../static/image/321.jpg" alt="">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
                                 <span class="slider__content_section">Подборка №1</span>
                             </div>
                             <h2 class="slider__content_title">текст текст текст</h2>
@@ -204,7 +270,7 @@
                     <div class="slider__item">
                         <div class="slider__content">
                             <div class="slider__content_header">
-                                <img class="slider__content_img" src="../static/image/321.jpg" alt="">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
                                 <span class="slider__content_section">Подборка №1</span>
                             </div>
                             <h2 class="slider__content_title">текст текст текст</h2>
@@ -216,7 +282,7 @@
                     <div class="slider__item">
                         <div class="slider__content">
                             <div class="slider__content_header">
-                                <img class="slider__content_img" src="../static/image/321.jpg" alt="">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
                                 <span class="slider__content_section">Подборка №1</span>
                             </div>
                             <h2 class="slider__content_title">текст текст текст</h2>
@@ -228,7 +294,7 @@
                     <div class="slider__item">
                         <div class="slider__content">
                             <div class="slider__content_header">
-                                <img class="slider__content_img" src="../static/image/321.jpg" alt="">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
                                 <span class="slider__content_section">Подборка №1</span>
                             </div>
                             <h2 class="slider__content_title">текст текст текст</h2>
@@ -240,7 +306,7 @@
                     <div class="slider__item">
                         <div class="slider__content">
                             <div class="slider__content_header">
-                                <img class="slider__content_img" src="../static/image/321.jpg" alt="">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
                                 <span class="slider__content_section">Подборка №1</span>
                             </div>
                             <h2 class="slider__content_title">текст текст текст</h2>
@@ -252,7 +318,7 @@
                     <div class="slider__item">
                         <div class="slider__content">
                             <div class="slider__content_header">
-                                <img class="slider__content_img" src="../static/image/321.jpg" alt="">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
                                 <span class="slider__content_section">Подборка №1</span>
                             </div>
                             <h2 class="slider__content_title">текст текст текст</h2>
@@ -264,7 +330,7 @@
                     <div class="slider__item">
                         <div class="slider__content">
                             <div class="slider__content_header">
-                                <img class="slider__content_img" src="../static/image/321.jpg" alt="">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
                                 <span class="slider__content_section">Подборка №1</span>
                             </div>
                             <h2 class="slider__content_title">текст текст текст</h2>
@@ -292,6 +358,13 @@
 
 
 
+
+
+
+
+
+
+
         </body>
         </html>
 
@@ -301,9 +374,7 @@
 
 
 
-
     <script type="text/javascript">
-
 
 
 
