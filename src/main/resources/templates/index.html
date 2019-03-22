@@ -1,10 +1,658 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Главная страница</title>
 </head>
 <body>
-<div>Hellooooo!!!</div>
+<header>
+    <!-- Авторизация -->
+    <div class="modal" id="modal-one" aria-hidden="true">
+        <form  method="post" class="ui-form">
+            <div class="modal-dialog">
+                <div class="modal-header">
+
+                    <h2>Авторизация</h2>
+
+                    <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
+                </div>
+                <p th:if="${error!=''}" th:text="${error}" id="message"></p>
+                <div class="modal-body ">
+                    <label for="login">Логин<br></label>  <input type="text" name="username" id="login" required autocomplete="off">
+                </div>
+                <div class="modal-body ">
+                    <label for="password">Пароль<br></label> <input type="password" name="password" id="password" required autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                    <p><input type="submit" value="Войти"></p>
+                    <p><a th:href="@{/recoverPass}" class="recoverPass">Забыли пароль?</a></p><!--Изменяем на "#close"-->
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- / Регистрация -->
+    <div class="modal" id="modal-two" aria-hidden="true">
+        <form  method="post" class="ui-form">
+            <div class="modal-dialog">
+                <div class="modal-header">
+
+                    <h2>Регистрация</h2>
+
+                    <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
+                </div>
+                <p th:if="${message}" id="message">Данный логин уже используется</p>
+                <div class="modal-body">
+                    <label for="password">Пароль<br></label><input type="password" name="password" id="password" pattern=".{8,}"   required title="8 символов  минимум">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="fio">Фамилия Имя Отчество<br></label> <input type="text" name="fio" id="fio" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                    <label th:if="${user==null}" for="fio1">Фамилия Имя Отчество<br></label><input type="text" name="fio" id="fio1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="email">E - mail<br></label>  <input type="email" name="email" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" required>
+                    <label for="email1" th:if="${user==null}">E - mail<br></label>  <input type="email" name="email" id="email1" th:if="${user==null}" required>
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" id="specialLabel1" for="birthday">Дата рождения<br></label> <input type="date" name="birthday" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
+                    <label id="specialLabel" for="birthday1" th:if="${user==null}">Дата рождения<br></label> <input type="date" name="birthday" th:if="${user==null}"  id="birthday1">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="phone_number">Номер телефона<br></label> <input type="number" name="phone_number" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" required title="Длина должна быть 10 цифр">
+                    <label th:if="${user==null}" for="phone_number1">Номер телефона<br></label> <input type="number" name="phone_number" th:if="${user==null}"  pattern="[0-9]{10}" id="phone_number1" required title="Длина должна быть 10 цифр">
+                </div>
+                <div class="modal-body">
+                    <label th:if="${user!=null}" for="address">Адрес проживания<br></label> <input type="text" name="address" id="address" th:if="${user!=null}" th:value="${user.getAddress()}" required autocomplete="off">
+                    <label for="address1" th:if="${user==null}">Адрес проживания<br></label> <input type="text" name="address" id="address1" th:if="${user==null}" required autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                    <p><input type="submit" value="Зарегистрироваться"></p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="center-block-main">
+        <div class="header-top clearfix">
+            <p class ="logo"><a href="#">LIBRARY</a></p>
+            <div class="search">
+                <form th:action="@{/find}" method="post" class="form">
+                    <input type="text" name="info" id="search_box" placeholder="Введите название книги или автора" autocomplete="off">
+                    <button type="submit">ИСКАТЬ</button>
+                </form>
+                <div id="search_advice_wrapper"></div>
+            </div>
+        <div class="login">
+            <a sec:authorize="isAnonymous()" href="#modal-one">Вход</a>
+            <a sec:authorize="isAnonymous()" href="#modal-two">Регистрация</a>
+        </div>
+
+        </div>
+        <div class="header-bottom">
+            <nav>
+                <ul class="menu">
+                    <li><a href="#">Жанры</a>
+                        <ul class="submenu">
+                            <li th:each="genre:${genres}">
+                                <a th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Новинки</a></li>
+                    <li><a href="#">Популярное</a></li>
+                    <li><a href="#">Подборки</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="slider1">
+            <ul id="slides">
+                <li class="slide showing">Slide 1</li>
+                <li class="slide">Slide 2</li>
+                <li class="slide">Slide 3</li>
+                <li class="slide">Slide 4</li>
+                <li class="slide">Slide 5</li>
+            </ul>
+        </div>
+        <section class="block-section">
+            <h2>Последние поступления</h2>
+            <div class="block-main clearfix">
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРОНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+            </div>
+
+            <div class="ListOfPopular clearfix">
+               <span> <a href="#">Посмотреть полный список</a></span>
+            </div>
+        </section>
+
+
+
+
+        <section class="block-section">
+            <h2>Популярное</h2>
+            <div class="block-main clearfix">
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+
+                <arcticle>
+                    <img th:src="@{image/123.jpg}" alt="">
+                    <div class="block-main-content">
+                        <h2>Название</h2>
+                        <h3>Жанр</h3>
+                        <p>Описание</p>
+
+                        <p class="product clearfix">
+                            <span class="available">в наличии</span>
+                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
+                        </p>
+                    </div>
+                </arcticle>
+            </div>
+
+            <div class="ListOfPopular clearfix">
+                <span> <a href="#">Посмотреть полный список</a></span>
+            </div>
+        </section>
+
+
+
+        <div class="container center-block-main">
+
+            <div class="slider">
+                <div class="slider__wrapper">
+                    <div class="slider__item">
+                        <div class="slider__content">
+                            <div class="slider__content_header">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
+                                <span class="slider__content_section">Подборка №1</span>
+                            </div>
+                            <h2 class="slider__content_title">текст текст текст</h2>
+                            <div class="slider__content_footer  clearfix">
+                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__content">
+                            <div class="slider__content_header">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
+                                <span class="slider__content_section">Подборка №1</span>
+                            </div>
+                            <h2 class="slider__content_title">текст текст текст</h2>
+                            <div class="slider__content_footer  clearfix">
+                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__content">
+                            <div class="slider__content_header">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
+                                <span class="slider__content_section">Подборка №1</span>
+                            </div>
+                            <h2 class="slider__content_title">текст текст текст</h2>
+                            <div class="slider__content_footer  clearfix">
+                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__content">
+                            <div class="slider__content_header">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
+                                <span class="slider__content_section">Подборка №1</span>
+                            </div>
+                            <h2 class="slider__content_title">текст текст текст</h2>
+                            <div class="slider__content_footer  clearfix">
+                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__content">
+                            <div class="slider__content_header">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
+                                <span class="slider__content_section">Подборка №1</span>
+                            </div>
+                            <h2 class="slider__content_title">текст текст текст</h2>
+                            <div class="slider__content_footer  clearfix">
+                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__content">
+                            <div class="slider__content_header">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
+                                <span class="slider__content_section">Подборка №1</span>
+                            </div>
+                            <h2 class="slider__content_title">текст текст текст</h2>
+                            <div class="slider__content_footer  clearfix">
+                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider__item">
+                        <div class="slider__content">
+                            <div class="slider__content_header">
+                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
+                                <span class="slider__content_section">Подборка №1</span>
+                            </div>
+                            <h2 class="slider__content_title">текст текст текст</h2>
+                            <div class="slider__content_footer  clearfix">
+                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="slider__control slider__control_left" href="#" role="button"></a>
+                <a class="slider__control slider__control_right" href="#" role="button"></a>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </body>
+        </html>
+
+
+
+
+
+
+
+    <script type="text/javascript">
+
+
+
+
+
+
+
+
+
+
+
+
+'use strict';
+    var multiItemSlider = (function () {
+
+      function _isElementVisible(element) {
+        var rect = element.getBoundingClientRect(),
+          vWidth = window.innerWidth || doc.documentElement.clientWidth,
+          vHeight = window.innerHeight || doc.documentElement.clientHeight,
+          elemFromPoint = function (x, y) { return document.elementFromPoint(x, y) };
+        if (rect.right < 0 || rect.bottom < 0
+          || rect.left > vWidth || rect.top > vHeight)
+          return false;
+        return (
+          element.contains(elemFromPoint(rect.left, rect.top))
+          || element.contains(elemFromPoint(rect.right, rect.top))
+          || element.contains(elemFromPoint(rect.right, rect.bottom))
+          || element.contains(elemFromPoint(rect.left, rect.bottom))
+        );
+      }
+
+      return function (selector, config) {
+        var
+          _mainElement = document.querySelector(selector),
+          _sliderWrapper = _mainElement.querySelector('.slider__wrapper'),
+          _sliderItems = _mainElement.querySelectorAll('.slider__item'),
+          _sliderControls = _mainElement.querySelectorAll('.slider__control'),
+          _sliderControlLeft = _mainElement.querySelector('.slider__control_left'),
+          _sliderControlRight = _mainElement.querySelector('.slider__control_right'),
+          _wrapperWidth = parseFloat(getComputedStyle(_sliderWrapper).width),
+          _itemWidth = parseFloat(getComputedStyle(_sliderItems[0]).width),
+          _html = _mainElement.innerHTML,
+          _positionLeftItem = 0,
+          _transform = 0,
+          _step = _itemWidth / _wrapperWidth * 100,
+          _items = [],
+          _interval = 0,
+          _states = [
+            { active: false, minWidth: 0, count: 1 },
+            { active: false, minWidth: 576, count: 2 },
+            { active: false, minWidth: 992, count: 3 },
+            { active: false, minWidth: 1200, count: 4 },
+          ],
+          _config = {
+            isCycling: false,
+            direction: 'right',
+            interval: 5000,
+            pause: true
+          };
+
+        for (var key in config) {
+          if (key in _config) {
+            _config[key] = config[key];
+          }
+        }
+
+        _sliderItems.forEach(function (item, index) {
+          _items.push({ item: item, position: index, transform: 0 });
+        });
+
+        var _setActive = function () {
+          var _index = 0;
+          var width = parseFloat(document.body.clientWidth);
+          _states.forEach(function (item, index, arr) {
+            _states[index].active = false;
+            if (width >= _states[index].minWidth)
+              _index = index;
+          });
+          _states[_index].active = true;
+        }
+
+        var _getActive = function () {
+          var _index;
+          _states.forEach(function (item, index, arr) {
+            if (_states[index].active) {
+              _index = index;
+            }
+          });
+          return _index;
+        }
+
+        var position = {
+          getItemMin: function () {
+            var indexItem = 0;
+            _items.forEach(function (item, index) {
+              if (item.position < _items[indexItem].position) {
+                indexItem = index;
+              }
+            });
+            return indexItem;
+          },
+          getItemMax: function () {
+            var indexItem = 0;
+            _items.forEach(function (item, index) {
+              if (item.position > _items[indexItem].position) {
+                indexItem = index;
+              }
+            });
+            return indexItem;
+          },
+          getMin: function () {
+            return _items[position.getItemMin()].position;
+          },
+          getMax: function () {
+            return _items[position.getItemMax()].position;
+          }
+        }
+
+        var _transformItem = function (direction) {
+          var nextItem;
+          if (!_isElementVisible(_mainElement)) {
+            return;
+          }
+          if (direction === 'right') {
+            _positionLeftItem++;
+            if ((_positionLeftItem + _wrapperWidth / _itemWidth - 1) > position.getMax()) {
+              nextItem = position.getItemMin();
+              _items[nextItem].position = position.getMax() + 1;
+              _items[nextItem].transform += _items.length * 100;
+              _items[nextItem].item.style.transform = 'translateX(' + _items[nextItem].transform + '%)';
+            }
+            _transform -= _step;
+          }
+          if (direction === 'left') {
+            _positionLeftItem--;
+            if (_positionLeftItem < position.getMin()) {
+              nextItem = position.getItemMax();
+              _items[nextItem].position = position.getMin() - 1;
+              _items[nextItem].transform -= _items.length * 100;
+              _items[nextItem].item.style.transform = 'translateX(' + _items[nextItem].transform + '%)';
+            }
+            _transform += _step;
+          }
+          _sliderWrapper.style.transform = 'translateX(' + _transform + '%)';
+        }
+
+        var _cycle = function (direction) {
+          if (!_config.isCycling) {
+            return;
+          }
+          _interval = setInterval(function () {
+            _transformItem(direction);
+          }, _config.interval);
+        }
+
+        var _controlClick = function (e) {
+          e.preventDefault();
+          if (e.target.classList.contains('slider__control')) {
+            var direction = e.target.classList.contains('slider__control_right') ? 'right' : 'left';
+            _transformItem(direction);
+            clearInterval(_interval);
+            _cycle(_config.direction);
+          }
+        };
+
+        var _handleVisibilityChange = function () {
+          if (document.visibilityState === "hidden") {
+            clearInterval(_interval);
+          } else {
+            clearInterval(_interval);
+            _cycle(_config.direction);
+          }
+        }
+
+        var _refresh = function () {
+          clearInterval(_interval);
+          _mainElement.innerHTML = _html;
+          _sliderWrapper = _mainElement.querySelector('.slider__wrapper');
+          _sliderItems = _mainElement.querySelectorAll('.slider__item');
+          _sliderControls = _mainElement.querySelectorAll('.slider__control');
+          _sliderControlLeft = _mainElement.querySelector('.slider__control_left');
+          _sliderControlRight = _mainElement.querySelector('.slider__control_right');
+          _wrapperWidth = parseFloat(getComputedStyle(_sliderWrapper).width);
+          _itemWidth = parseFloat(getComputedStyle(_sliderItems[0]).width);
+          _positionLeftItem = 0;
+          _transform = 0;
+          _step = _itemWidth / _wrapperWidth * 100;
+          _items = [];
+          _sliderItems.forEach(function (item, index) {
+            _items.push({ item: item, position: index, transform: 0 });
+          });
+        }
+
+        var _setUpListeners = function () {
+          _mainElement.addEventListener('click', _controlClick);
+          if (_config.pause && _config.isCycling) {
+            _mainElement.addEventListener('mouseenter', function () {
+              clearInterval(_interval);
+            });
+            _mainElement.addEventListener('mouseleave', function () {
+              clearInterval(_interval);
+              _cycle(_config.direction);
+            });
+          }
+          document.addEventListener('visibilitychange', _handleVisibilityChange, false);
+          window.addEventListener('resize', function () {
+            var
+              _index = 0,
+              width = parseFloat(document.body.clientWidth);
+            _states.forEach(function (item, index, arr) {
+              if (width >= _states[index].minWidth)
+                _index = index;
+            });
+            if (_index !== _getActive()) {
+              _setActive();
+              _refresh();
+            }
+          });
+        }
+
+        // инициализация
+        _setUpListeners();
+        if (document.visibilityState === "visible") {
+          _cycle(_config.direction);
+        }
+        _setActive();
+
+        return {
+          right: function () {
+            _transformItem('right');
+          },
+          left: function () {
+            _transformItem('left');
+          },
+          stop: function () {
+            _config.isCycling = false;
+            clearInterval(_interval);
+          },
+          cycle: function () {
+            _config.isCycling = true;
+            clearInterval(_interval);
+            _cycle();
+          }
+        }
+
+      }
+    }());
+
+    var slider = multiItemSlider('.slider', {
+      isCycling: true
+    })
+
+
+        var slides = document.querySelectorAll('#slides .slide');
+var currentSlide = 0;
+var slideInterval = setInterval(nextSlide,4000);
+
+function nextSlide(){
+    slides[currentSlide].className = 'slide';
+    currentSlide = (currentSlide+1)%slides.length;
+    slides[currentSlide].className = 'slide showing';
+}
+
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
