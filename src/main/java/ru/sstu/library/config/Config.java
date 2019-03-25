@@ -26,6 +26,7 @@ public class Config extends WebSecurityConfigurerAdapter {
                     .antMatchers( "/","/login","/registration","/image/**","/css/**").permitAll()
                     .anyRequest()
                     .authenticated()
+
                 .and()
                     .formLogin()
                     .loginPage("/#modal-one")

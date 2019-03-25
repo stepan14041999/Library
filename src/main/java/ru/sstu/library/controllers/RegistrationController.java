@@ -13,7 +13,7 @@ import ru.sstu.library.service.RegistrationService;
 
 @Controller
 public class RegistrationController {
-    @Autowired
+   @Autowired
     private RegistrationService registrationService;
     @Autowired
     private BCryptPasswordEncoder encoder;
