@@ -11,7 +11,7 @@
 <header>
     <!-- Авторизация -->
     <div class="modal" id="modal-one" aria-hidden="true">
-        <form  method="post" class="ui-form">
+        <form  method="post" class="ui-form" th:action="@{/login}">
             <div class="modal-dialog">
                 <div class="modal-header">
 
@@ -19,7 +19,7 @@
 
                     <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
                 </div>
-                <p th:if="${error!=''}" th:text="${error}" id="message"></p>
+                <p th:if="${error!=''}" th:text="${error}"></p>
                 <div class="modal-body ">
                     <label for="login">Логин<br></label>  <input type="text" name="username" id="login" required autocomplete="off">
                 </div>
@@ -44,7 +44,7 @@
 
                     <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
                 </div>
-                <p th:if="${message}" id="message">Данный логин уже используется</p>
+                <p th:if="${error!=''}" th:text="${error}"></p>
                 <div class="modal-body">
                     <label for="password">Пароль<br></label><input type="password" name="password" id="password" pattern=".{8,}"   required title="8 символов  минимум">
                 </div>
@@ -345,14 +345,6 @@
             </div>
 
         </div>
-
-
-
-
-
-
-
-
 
 
 

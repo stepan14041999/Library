@@ -18,28 +18,17 @@ public class RegistrationController {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    @GetMapping("/login")
-    public String getLoginPage(Model model,@RequestParam(required = false) String error){
-        model.addAttribute("error",error);
-        return "login";
-    }
-
-    @GetMapping("/registration")
-    public String getRegistrationPage(Model model){
-        return "registration";
-    }
-
     @PostMapping("/registration")
     public String addUser(User user, Model model){
         User userFromDb=registrationService.getUserByLogin(user.getLogin());
         if(userFromDb!=null){
             model.addAttribute("message","true");
             model.addAttribute("user",user);
-            return "registration";
+            return "redirect:/?msg=again#modal-two";
         }
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole(registrationService.getRoleByName("USER"));
         registrationService.saveUser(user);
-        return "success";
+        return "redirect:/#modal-one";
     }
 }
