@@ -5,75 +5,12 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Главная страница</title>
 </head>
 <body>
 <header>
-    <!-- Авторизация -->
-    <div class="modal" id="modal-one" aria-hidden="true">
-        <form  method="post" class="ui-form">
-            <div class="modal-dialog">
-                <div class="modal-header">
 
-                    <h2>Авторизация</h2>
-
-                    <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
-                </div>
-                <p th:if="${error!=''}" th:text="${error}" id="message"></p>
-                <div class="modal-body ">
-                    <label for="login">Логин<br></label>  <input type="text" name="username" id="login" required autocomplete="off">
-                </div>
-                <div class="modal-body ">
-                    <label for="password">Пароль<br></label> <input type="password" name="password" id="password" required autocomplete="off">
-                </div>
-                <div class="modal-footer">
-                    <p><input type="submit" value="Войти"></p>
-                    <p><a th:href="@{/recoverPass}" class="recoverPass">Забыли пароль?</a></p><!--Изменяем на "#close"-->
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- / Регистрация -->
-    <div class="modal" id="modal-two" aria-hidden="true">
-        <form  method="post" class="ui-form">
-            <div class="modal-dialog">
-                <div class="modal-header">
-
-                    <h2>Регистрация</h2>
-
-                    <a href="#close" class="btn-close" aria-hidden="true">×</a> <!-- Изменяем на "#close"-->
-                </div>
-                <p th:if="${message}" id="message">Данный логин уже используется</p>
-                <div class="modal-body">
-                    <label for="password">Пароль<br></label><input type="password" name="password" id="password" pattern=".{8,}"   required title="8 символов  минимум">
-                </div>
-                <div class="modal-body">
-                    <label th:if="${user!=null}" for="fio">Фамилия Имя Отчество<br></label> <input type="text" name="fio" id="fio" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
-                    <label th:if="${user==null}" for="fio1">Фамилия Имя Отчество<br></label><input type="text" name="fio" id="fio1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
-                </div>
-                <div class="modal-body">
-                    <label th:if="${user!=null}" for="email">E - mail<br></label>  <input type="email" name="email" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" required>
-                    <label for="email1" th:if="${user==null}">E - mail<br></label>  <input type="email" name="email" id="email1" th:if="${user==null}" required>
-                </div>
-                <div class="modal-body">
-                    <label th:if="${user!=null}" id="specialLabel1" for="birthday">Дата рождения<br></label> <input type="date" name="birthday" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
-                    <label id="specialLabel" for="birthday1" th:if="${user==null}">Дата рождения<br></label> <input type="date" name="birthday" th:if="${user==null}"  id="birthday1">
-                </div>
-                <div class="modal-body">
-                    <label th:if="${user!=null}" for="phone_number">Номер телефона<br></label> <input type="number" name="phone_number" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" required title="Длина должна быть 10 цифр">
-                    <label th:if="${user==null}" for="phone_number1">Номер телефона<br></label> <input type="number" name="phone_number" th:if="${user==null}"  pattern="[0-9]{10}" id="phone_number1" required title="Длина должна быть 10 цифр">
-                </div>
-                <div class="modal-body">
-                    <label th:if="${user!=null}" for="address">Адрес проживания<br></label> <input type="text" name="address" id="address" th:if="${user!=null}" th:value="${user.getAddress()}" required autocomplete="off">
-                    <label for="address1" th:if="${user==null}">Адрес проживания<br></label> <input type="text" name="address" id="address1" th:if="${user==null}" required autocomplete="off">
-                </div>
-                <div class="modal-footer">
-                    <p><input type="submit" value="Зарегистрироваться"></p>
-                </div>
-            </div>
-        </form>
-    </div>
 
     <div class="center-block-main">
         <div class="header-top clearfix">
@@ -364,7 +301,9 @@
 
 
 
-
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         </body>
         </html>
 
