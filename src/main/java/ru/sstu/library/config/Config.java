@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import ru.sstu.library.service.UserService;
 
 @Configuration
@@ -22,18 +23,21 @@ public class Config extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/registration","/login","/image/**","/css/**","/").permitAll()
-                .anyRequest()
-                .authenticated()
+                    .antMatchers( "/","/genres","/login","/registration","/image/**","/css/**").permitAll()
+                    .anyRequest()
+                    .authenticated()
+
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/#modal-one")
+                    .loginProcessingUrl("/login")
+                    .failureHandler(customAuthenticationFailureHandler())
+                    .defaultSuccessUrl("/")
+                    .permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .permitAll();
+                    .logout()
+                    .logoutSuccessUrl("/")
+                    .permitAll();
     }
 
     @Bean
@@ -45,5 +49,10 @@ public class Config extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)
                 .passwordEncoder(bCryptPasswordEncoder());
+    }
+
+    @Bean
+    public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
     }
 }

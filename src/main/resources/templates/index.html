@@ -1,49 +1,179 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <title>Главная страница</title>
 </head>
 <body>
 <header>
 
 
-    <div class="center-block-main">
-        <div class="header-top clearfix">
-            <p class ="logo"><a href="#">LIBRARY</a></p>
-            <div class="search">
-                <form th:action="@{/find}" method="post" class="form">
-                    <input type="text" name="info" id="search_box" placeholder="Введите название книги или автора" autocomplete="off">
-                    <button type="submit">ИСКАТЬ</button>
-                </form>
-                <div id="search_advice_wrapper"></div>
+    <!-- Button trigger modal -->
+
+    <!-- авторизация -->
+    <div class="modal fade" id="avt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Авторизация</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form  method="post" class="ui-form" th:action="@{/login}">
+
+                            <p th:if="${error!=''}" th:text="${error}"></p>
+                            <div class="modal-body ">
+
+                                <label for="login" class="col-2">Логин</label>  <input type="text" name="username" class="col-6" id="login" required autocomplete="off" >
+                            </div>
+                            <div class="modal-body ">
+                                <label for="password" class="col-2">Пароль</label> <input type="password" name="password"  class="col-6" id="password" required autocomplete="off">
+                            </div>
+                            <div class="modal-footer">
+                                <p><input type="submit"  value="Войти"></p>
+                                <p><a th:href="@{/recoverPass}" class="recoverPass">Забыли пароль?</a></p><!--Изменяем на "#close"-->
+                            </div>
+
+                    </form>
+                </div>
+                </div>
+
             </div>
-        <div class="login">
-            <a sec:authorize="isAnonymous()" href="#modal-one">Вход</a>
-            <a sec:authorize="isAnonymous()" href="#modal-two">Регистрация</a>
         </div>
 
+    <!-- регистрация -->
+
+    <div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Регистрация</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form  method="post" class="ui-form" th:action="@{/login}">
+
+                        <p th:if="${error!=''}" th:text="${error}"></p>
+
+                        <div class="modal-body ">
+                            <label th:if="${user!=null}"  class="col-3" for="username">Логин<br></label> <input type="text" name="username"  class="col-6" id="username" th:if="${user!=null}" th:value="${user.getUsername()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="">
+                            <label th:if="${user==null}"  class="col-3" for="username1">Логин<br></label><input type="text" name="username" class="col-6" id="username1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="">
+
+                        </div>
+                        <div class="modal-body">
+                            <label for="password"  class="col-3">Пароль<br></label><input type="password" name="password" class="col-6" id="password" pattern=".{8,}"   required title="8 символов  минимум">
+                        </div>
+                        <div class="modal-body">
+                            <label th:if="${user!=null}"  class="col-3" for="fio">Фамилия Имя Отчество<br></label> <input type="text" name="fio"  class="col-6" id="fio" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                            <label th:if="${user==null}"  class="col-3" for="fio1">Фамилия Имя Отчество<br></label><input type="text" name="fio" class="col-6" id="fio1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                        </div>
+                        <div class="modal-body">
+                            <label th:if="${user!=null}"  class="col-3" for="email">E - mail<br></label>  <input type="email" name="email" class="col-6" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" required>
+                            <label for="email1" th:if="${user==null}"  class="col-3">E - mail<br></label>  <input type="email" name="email" class="col-6" id="email1" th:if="${user==null}" required>
+                        </div>
+                        <div class="modal-body">
+                            <label th:if="${user!=null}" id="specialLabel1"  class="col-3" for="birthday">Дата рождения<br></label> <input type="date" name="birthday" class="col-6" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
+                            <label id="specialLabel" for="birthday1" class="col-3" th:if="${user==null}">Дата рождения<br></label> <input type="date" name="birthday" class="col-6" th:if="${user==null}"  id="birthday1">
+                        </div>
+                        <div class="modal-body">
+                            <label th:if="${user!=null}" for="phone_number"  class="col-3">Номер телефона<br></label> <input type="number" name="phone_number" class="col-6" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" required title="Длина должна быть 10 цифр">
+                            <label th:if="${user==null}" for="phone_number1"  class="col-3">Номер телефона<br></label> <input type="number" name="phone_number"  class="col-6"th:if="${user==null}"  pattern="[0-9]{10}" id="phone_number1" required title="Длина должна быть 10 цифр">
+                        </div>
+                        <div class="modal-body">
+                            <label th:if="${user!=null}" for="address"  class="col-3">Адрес проживания<br></label> <input type="text" name="address" id="address" class="col-6" th:if="${user!=null}" th:value="${user.getAddress()}" required autocomplete="off">
+                            <label for="address1" th:if="${user==null}"  class="col-3">Адрес проживания<br></label> <input type="text" name="address" id="address1" class="col-6" th:if="${user==null}" required autocomplete="off">
+                        </div>
+                        <div class="modal-footer">
+                            <p><input type="submit" value="Зарегистрироваться"></p>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
         </div>
+    </div>
+
+
+    </div>
+
+
+
+
+    <div class="center-block-main">
+
+
+        <div class="header-top clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <p class ="logo"><a href="#">LIBRARY</a></p>
+                    </div>
+                    <div class="col-sm">
+                        <form th:action="@{/find}" method="post">
+                        <div class="input-group search">
+                            <form th:action="@{/find}" method="post">
+                            <input type="text" class="form-control" name="info" id="search_box"
+                                   placeholder="Введите название книги ">
+                            <div class="input-group-addon" ><i class="fa fa-search"></i></div>
+                            <button class="btn btn-outline-secondary" type="button">ИСКАТЬ</button>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="col-sm">
+                        <div class="login">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#avt">
+                                Вход
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reg">
+                                Регистрация
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         <div class="header-bottom">
             <nav>
-                <ul class="menu">
-                    <li><a href="#">Жанры</a>
-                        <ul class="submenu">
+                <ul class="nav nav-pills menu">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Жанры</a>
+                        <ul class="dropdown-menu">
                             <li th:each="genre:${genres}">
-                                <a th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
+                            <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#">Новинки</a></li>
-                    <li><a href="#">Популярное</a></li>
-                    <li><a href="#">Подборки</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Новинки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Популярное</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Подборки</a>
+                    </li>
                 </ul>
             </nav>
         </div>
+
+
+
+
+
+
         <div class="slider1">
             <ul id="slides">
                 <li class="slide showing">Slide 1</li>
@@ -53,6 +183,8 @@
                 <li class="slide">Slide 5</li>
             </ul>
         </div>
+
+
         <section class="block-section">
             <h2>Последние поступления</h2>
             <div class="block-main clearfix">
@@ -301,10 +433,13 @@
 
 
 
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        </body>
+
+
+</body>
         </html>
 
 
