@@ -29,7 +29,7 @@ public class Config extends WebSecurityConfigurerAdapter {
 
                 .and()
                     .formLogin()
-                    .loginPage("/#modal-one")
+                    .loginPage("/")
                     .loginProcessingUrl("/login")
                     .failureHandler(customAuthenticationFailureHandler())
                     .defaultSuccessUrl("/")
