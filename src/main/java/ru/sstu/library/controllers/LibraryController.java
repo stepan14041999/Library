@@ -28,4 +28,10 @@ public class LibraryController {
         model.addAttribute("message",false);
         return "index";
     }
+
+    @GetMapping("/test")
+    public String testImage(Model model){
+        model.addAttribute("books",libraryService.getAllBooks());
+        return "test";
+    }
 }
