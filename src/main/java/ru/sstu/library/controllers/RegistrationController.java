@@ -13,7 +13,7 @@ import ru.sstu.library.service.RegistrationService;
 
 @Controller
 public class RegistrationController {
-    @Autowired
+   @Autowired
     private RegistrationService registrationService;
     @Autowired
     private BCryptPasswordEncoder encoder;
@@ -22,13 +22,13 @@ public class RegistrationController {
     public String addUser(User user, Model model){
         User userFromDb=registrationService.getUserByLogin(user.getLogin());
         if(userFromDb!=null){
-            model.addAttribute("message","true");
+            model.addAttribute("errorRegistration","Логин уже занят!");
             model.addAttribute("user",user);
-            return "redirect:/?msg=again#modal-two";
+            return "index";
         }
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole(registrationService.getRoleByName("USER"));
         registrationService.saveUser(user);
-        return "redirect:/#modal-one";
+        return "index";
     }
 }
