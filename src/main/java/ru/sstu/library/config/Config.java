@@ -23,10 +23,9 @@ public class Config extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers( "/","/login","/registration","/image/**","/css/**").permitAll()
-                    .anyRequest()
-                    .authenticated()
-
+                .antMatchers("/", "/registration","/login", "image/**", "css/**", "/actuator/**").permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/#modal-one")
