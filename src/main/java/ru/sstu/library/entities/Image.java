@@ -23,9 +23,8 @@ public class Image {
     @OneToMany(mappedBy = "imageNews")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Collection<News> news;
-    @OneToOne(mappedBy = "sets")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Collection<Sets> sets;
+    @OneToOne(mappedBy = "image")
+    private Set set;
 
     @Override
     public String toString() {

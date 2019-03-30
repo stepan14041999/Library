@@ -41,8 +41,8 @@ public class Book {
     private Level level;
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany()
-    @JoinTable(name = "BOOKSETS",joinColumns = @JoinColumn(name="SET_ID"),inverseJoinColumns =@JoinColumn(name="SET_ID"))
-    private Collection<Sets> sets;
+    @JoinTable(name = "BOOKTOSETS",joinColumns = @JoinColumn(name = "BOOK_ID"),inverseJoinColumns = @JoinColumn(name="SETS_ID"))
+    private Collection<Set> sets;
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany()
     @JoinTable(name = "BOOKTOAUTHOR",joinColumns = @JoinColumn(name="BOOK_ID"),inverseJoinColumns =@JoinColumn(name="AUTHOR_ID"))

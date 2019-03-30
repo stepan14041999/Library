@@ -1,33 +1,33 @@
 package ru.sstu.library.entities;
 
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name="SetsBooks")
 @Data
-public class Sets {
+public class Set {
     @Id
-    @Setter
+    @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer setId;
-    @OneToOne(mappedBy = "image")
+    private Integer set_id;
+    private String description;
+    @OneToOne(optional = false)
     @JoinColumn(name = "IMAGE_ID")
     private Image image;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "Book")
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "sets")
     private Collection<Book> books;
-    private String description;
+
 
 
     @Override
     public String toString() {
-        return "Sets{" +
-                "setId=" + setId +
+        return "Set{" +
+                "setId=" + set_id +
                 ", books=" + books +
                 ", description='" + description + '\'' +
                 ", image=" + image +
