@@ -2,9 +2,11 @@ package ru.sstu.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sstu.library.entities.Book;
 import ru.sstu.library.entities.Genre;
 import ru.sstu.library.entities.News;
 import ru.sstu.library.entities.Order;
+import ru.sstu.library.repos.BookRepo;
 import ru.sstu.library.repos.GenreRepo;
 import ru.sstu.library.repos.NewsRepo;
 import ru.sstu.library.repos.OrderRepo;
@@ -20,6 +22,8 @@ public class LibraryService {
     private GenreRepo genreRepo;
     @Autowired
     private OrderRepo orderRepo;
+    @Autowired
+    private BookRepo bookRepo;
 
     public List<News> getAllNews(){
         List<News> news=(List<News>) newsRepo.findAll();
@@ -31,5 +35,10 @@ public class LibraryService {
         List<Genre> genres=(List<Genre>) genreRepo.findAll();
         genres.sort(Comparator.comparing(Genre::getName));
         return genres;
+    }
+
+    public List<Book> getAllBooks(){
+        List<Book> books=(List<Book>) bookRepo.findAll();
+        return books;
     }
 }

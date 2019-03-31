@@ -23,13 +23,12 @@ public class Config extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers( "/","/genres","/login","/registration","/image/**","/css/**").permitAll()
+                    .antMatchers("/", "/registration","/login", "/image/**", "/css/**", "/actuator/**","/genres","/img/**").permitAll()
                     .anyRequest()
                     .authenticated()
-
                 .and()
                     .formLogin()
-                    .loginPage("/#modal-one")
+                    .loginPage("/")
                     .loginProcessingUrl("/login")
                     .failureHandler(customAuthenticationFailureHandler())
                     .defaultSuccessUrl("/")

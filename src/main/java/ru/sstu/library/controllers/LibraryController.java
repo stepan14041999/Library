@@ -15,19 +15,24 @@ public class LibraryController {
     @GetMapping("/")
     public String main(@RequestParam(name="msg", required = false,defaultValue = "no") String msg, Model model){
         if(msg.equals("failure")){
-            model.addAttribute("error","Неправильный логин или пароль!!!");
+            model.addAttribute("error","Неправильный логин или пароль!");
         }
         else if(msg.equals("denied")){
-            model.addAttribute("error","Вы заблокированы!!!");
-        }
-        else if(msg.equals("again")){
-            model.addAttribute("error","Данный логин уже занят!!!");
+            model.addAttribute("error","Вы заблокированы!");
         }
         model.addAttribute("news",libraryService.getAllNews());
         model.addAttribute("genres",libraryService.getAllGenres());
         model.addAttribute("message",false);
         return "index";
 
+    }
+
+
+
+    @GetMapping("/test")
+    public String testImage(Model model){
+        model.addAttribute("books",libraryService.getAllBooks());
+        return "test";
     }
 
 }
