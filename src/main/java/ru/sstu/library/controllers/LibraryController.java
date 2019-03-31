@@ -27,5 +27,7 @@ public class LibraryController {
         model.addAttribute("genres",libraryService.getAllGenres());
         model.addAttribute("message",false);
         return "index";
+
     }
+
 }
