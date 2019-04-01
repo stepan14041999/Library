@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.sstu.library.service.UserService;
 
 @Configuration
@@ -23,7 +24,7 @@ public class Config extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/","/imageforbook/**", "/registration","/login", "/image/**", "/css/**", "/actuator/**","/genres","/img/**").permitAll()
+                    .antMatchers("/","/genre/**","/imageforbook/**", "/registration","/login", "/image/**", "/css/**", "/actuator/**","/genres","/img/**").permitAll()
                     .anyRequest()
                     .authenticated()
                 .and()
@@ -35,6 +36,7 @@ public class Config extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                     .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/")
                     .permitAll();
     }

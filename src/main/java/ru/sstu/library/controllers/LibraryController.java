@@ -15,10 +15,10 @@ public class LibraryController {
     @GetMapping("/")
     public String main(@RequestParam(name="msg", required = false,defaultValue = "no") String msg, Model model){
         if(msg.equals("failure")){
-            model.addAttribute("error","Неправильный логин или пароль!");
+            model.addAttribute("errorLogin","Неправильный логин или пароль!");
         }
         else if(msg.equals("denied")){
-            model.addAttribute("error","Вы заблокированы!");
+            model.addAttribute("errorLogin","Вы заблокированы!");
         }
         model.addAttribute("news",libraryService.getAllNews());
         model.addAttribute("genres",libraryService.getAllGenres());
@@ -26,17 +26,21 @@ public class LibraryController {
         return "index";
 
     }
-
-
-
     @GetMapping("/test")
-    public String testImage(Model model){
-        model.addAttribute("books",libraryService.getAllBooks());
+    public String test(){
         return "test";
     }
-    @GetMapping("/genres")
-    public String testImage1(Model model){
 
-        return "genres";
-    }
+//
+//
+//    @GetMapping("/test")
+//    public String testImage(Model model){
+//        model.addAttribute("books",libraryService.getAllBooks());
+//        return "test";
+//    }
+//    @GetMapping("/genres")
+//    public String testImage1(Model model){
+//
+//        return "genres";
+//    }
 }

@@ -109,309 +109,50 @@
 
 
 
-    <div class="center-block-main">
-        <div class="header-top clearfix">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <p class ="logo"><a href="#">LIBRARY</a></p>
-                    </div>
-                    <div class="col-sm">
-                        <form th:action="@{/find}" method="post">
-                            <div class="input-group search">
-                                <form th:action="@{/find}" method="post">
-                                    <input type="text" class="form-control" name="info" id="search_box"
-                                           placeholder="Введите название книги ">
-                                    <div class="input-group-addon" ><i class="fa fa-search"></i></div>
-                                    <button class="btn btn-outline-secondary" type="button">ИСКАТЬ</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-sm">
-                        <div class="login">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#avt">
-                                Вход
-                            </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reg">
-                                Регистрация
-                            </button>
-
+    <div class="container">
+        <div class="row mt-4" th:each="book:${books}">
+            <div class="col-sm-4 my-3">
+                <div class="card">
+                    <img class="card-img-top" th:src="'/img/'+${book.getImage().getLink()}"  alt="">
+                    <div class="card-body">
+                        <p class="card-title h2">
+                            <a th:text="${book.getName()}"></a>
+                        </p>
+                        <p class="card-author">
+                            Авторы: <span th:each="author:${book.getAuthors()}"><span th:text="${author.getFio()}"></span></span>
+                        </p>
+                        <p class="card-author">
+                            Переводчики: <span th:each="authorForeign:${book.getForeignAuthors()}"><span th:text="${authorForeign.getFio()}"></span></span>
+                        </p>
+                        <p class="card-desc em" th:text="${book.getDescription()}"></p>
+                        <div class="text-center line">
+                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="header-bottom">
-                <nav>
-                    <ul class="nav nav-pills menu">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Жанры</a>
-                            <ul class="dropdown-menu">
-                                <li th:each="genre:${genres}">
-                                    <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Новинки</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Популярное</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Подборки</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
         </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-2">
-                        сортировка
-                    </div>
-                    <div class="col-10">
-
-
-
-
-                        <div th:each="book:${books}">
-                            <div>
-                                <div>
-                                    <div>
-                                        <a href="'/order/'+${book.getBook_id()}">Hello
-                                            <img th:src="/img/+${book.getImage().getLink()}" th:width="200" th:height="200" alt="">
-                                        </a>
-                                    </div>
-                                    <p>
-                                        <a href="'/order/'+${book.getBook_id()}" th:text="${book.getName()}"></a>
-                                    </p>
-                                    <p>
-
-                                    </p>
-
-
-
-
-
-
-
-                        <section class="block-section">
-                            <h2>Жанр</h2>
-                            <div class="block-main clearfix">
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                            </div>
-
-
-                        </section>
-                        <section class="block-section">
-
-                            <div class="block-main clearfix">
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
+    </div>
 
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
 
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
 
-                            </div>
 
 
-                        </section>
-                        <section class="block-section">
 
-                            <div class="block-main clearfix">
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
 
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
 
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
 
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
 
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
 
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
 
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
 
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
 
-                            </div>
 
 
-                        </section>
-                    </div>
 
-                </div>
 
-
-        </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 

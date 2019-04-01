@@ -28,7 +28,7 @@
                 <div class="modal-body">
                     <form  method="post" class="ui-form" th:action="@{/login}">
 
-                            <p th:if="${errorRegistration!=''}" th:text="${errorRegistration}"  id="message"></p>
+                            <p th:if="${errorLogin!=''}" th:text="${errorLogin}"  id="messageLogin"></p>
                             <div class="modal-body ">
 
                                 <label for="login" class="col-2">Логин</label>  <input type="text" name="username" class="col-6" id="login" required autocomplete="off" >
@@ -62,11 +62,11 @@
                 <div class="modal-body">
                     <form  method="post" class="ui-form" th:action="@{/registration} ">
 
-                        <p th:if="${message}" id="message">Данный логин уже используется</p>
+                        <p th:if="${errorRegistration}" th:text="${errorRegistration}" id="messageRegistration"></p>
 
                         <div class="modal-body ">
-                            <input type="text" class="col-3" name="login" id="login" th:if="${user!=null}" th:value="${user.getLogin()}" required autocomplete="off"><label  th:if="${user!=null}" for="login">Логин</label>
-                            <input type="text"class="col-3" name="login" id="login1" th:if="${user==null}" required autocomplete="off"><label for="login1" th:if="${user==null}">Логин</label>
+                            <label  th:if="${user!=null}" for="login">Логин</label><input type="text" class="col-3" name="login" id="login" th:if="${user!=null}" th:value="${user.getLogin()}" required autocomplete="off">
+                            <label for="login1" th:if="${user==null}">Логин</label><input type="text"class="col-3" name="login" id="login1" th:if="${user==null}" required autocomplete="off">
                         </div>
                         </div>
                         <div class="modal-body">
@@ -131,13 +131,27 @@
                     </div>
                     <div class="col-sm">
                         <div class="login">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#avt">
+                            <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" data-toggle="modal" data-target="#avt">
                                 Вход
                             </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reg">
+                            <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" data-toggle="modal" data-target="#reg">
                                 Регистрация
                             </button>
-
+                            <form sec:authorize="hasAnyAuthority('USER')" th:action="@{/lk}">
+                                <button type="submit"  class="btn btn-primary" data-toggle="modal">
+                                    Личный кабинет
+                                </button>
+                            </form>
+                            <form sec:authorize="hasAnyAuthority('ADMIN','LIBRARIAN')" th:action="@{/lkstaff}">
+                                <button type="submit" class="btn btn-primary" data-toggle="modal">
+                                    Личный кабинет
+                                </button>
+                            </form>
+                            <form sec:authorize="isAuthenticated()" th:action="@{/logout}">
+                                <button type="submit" class="btn btn-primary" data-toggle="modal">
+                                    Выйти
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
