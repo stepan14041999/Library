@@ -65,8 +65,8 @@
                         <p th:if="${message}" id="message">Данный логин уже используется</p>
 
                         <div class="modal-body ">
-                            <input type="text" class="col-3" name="login" id="login" th:if="${user!=null}" th:value="${user.getLogin()}" required autocomplete="off"><label  th:if="${user!=null}" for="login">Логин</label>
-                            <input type="text"class="col-3" name="login" id="login1" th:if="${user==null}" required autocomplete="off"><label for="login1" th:if="${user==null}">Логин</label>
+                            <label  th:if="${user!=null}" for="login" class="col-3">Логин</label>  <input type="text" name="login" id="login" th:if="${user!=null}" th:value="${user.getLogin()}" required autocomplete="off">
+                            <label for="login1" th:if="${user==null}" class="col-3">Логин</label><input type="text" name="login" id="login1" th:if="${user==null}" required autocomplete="off">
                         </div>
                         </div>
                         <div class="modal-body">
@@ -497,7 +497,7 @@
                         <span> <a href="#">Посмотреть полный список</a></span>
                     </div>
             </section>
-            <!---------------------------------- Популярное---------------------------->
+            <!---------------------------------- Популярное------------------------------->
 
             <section class="block-section">
                 <h2>Подборки</h2>
@@ -583,7 +583,7 @@ function checkForm(form)
   if (document.getElementById("message").value == '')
 {
 
-  alert ('Заполните все поля');
+  $('#myModal').modal(options)
   return false;
 }
 
