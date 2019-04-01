@@ -28,7 +28,7 @@
                 <div class="modal-body">
                     <form  method="post" class="ui-form" th:action="@{/login}">
 
-                            <p th:if="${error!=''}" th:text="${error}"></p>
+                            <p th:if="${errorRegistration!=''}" th:text="${errorRegistration}"  id="message"></p>
                             <div class="modal-body ">
 
                                 <label for="login" class="col-2">Логин</label>  <input type="text" name="username" class="col-6" id="login" required autocomplete="off" >
@@ -60,14 +60,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form  method="post" class="ui-form" th:action="@{/login}">
+                    <form  method="post" class="ui-form" th:action="@{/registration} ">
 
-                        <p th:if="${error!=''}" th:text="${error}"></p>
+                        <p th:if="${message}" id="message">Данный логин уже используется</p>
 
                         <div class="modal-body ">
-                            <label th:if="${user!=null}"  class="col-3" for="username">Логин<br></label> <input type="text" name="username"  class="col-6" id="username" th:if="${user!=null}" th:value="${user.getUsername()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="">
-                            <label th:if="${user==null}"  class="col-3" for="username1">Логин<br></label><input type="text" name="username" class="col-6" id="username1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="">
-
+                            <input type="text" class="col-3" name="login" id="login" th:if="${user!=null}" th:value="${user.getLogin()}" required autocomplete="off"><label  th:if="${user!=null}" for="login">Логин</label>
+                            <input type="text"class="col-3" name="login" id="login1" th:if="${user==null}" required autocomplete="off"><label for="login1" th:if="${user==null}">Логин</label>
+                        </div>
                         </div>
                         <div class="modal-body">
                             <label for="password"  class="col-3">Пароль<br></label><input type="password" name="password" class="col-6" id="password" pattern=".{8,}"   required title="8 символов  минимум">
@@ -116,7 +116,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <p class ="logo"><a href="#">LIBRARY</a></p>
+                        <p class ="h2"><a href="#">LIBRARY</a></p>
                     </div>
                     <div class="col-sm">
                         <form th:action="@{/find}" method="post">
@@ -142,7 +142,7 @@
                     </div>
                 </div>
             </div>
-
+        </div>
 
 
         <div class="header-bottom">
@@ -169,7 +169,7 @@
             </nav>
         </div>
 
-
+        </heder>
 
 
 
@@ -185,234 +185,351 @@
         </div>
 
 
+
+
+            <!---------------------------------- Последние поступления---------------------------->
         <section class="block-section">
             <h2>Последние поступления</h2>
-            <div class="block-main clearfix">
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
+            <div >
 
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРОНИРОВАТЬ</button></span>
-                        </p>
+
+                    <div class="container">
+                        <div class="row mt-4">
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                            <p class="card-title h2">
+                                                <a>Название книги</a>
+                                                </p>
+                                            <p class="card-author">
+                                                Авторы: <span ><span></span></span>
+                                            </p>
+                                            <p class="card-author">
+                                                Переводчики: <span><span></span></span>
+                                            </p>
+                                            <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                        <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                        <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                        </div>
+                                    </div>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </arcticle>
 
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
-
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                        </p>
-                    </div>
-                </arcticle>
-
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
-
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                        </p>
-                    </div>
-                </arcticle>
-
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
-
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                        </p>
-                    </div>
-                </arcticle>
-            </div>
 
             <div class="ListOfPopular clearfix">
                <span> <a href="#">Посмотреть полный список</a></span>
             </div>
         </section>
+            <!---------------------------------- Последние поступления---------------------------->
+            <!---------------------------------- Популярное---------------------------->
+
+            <section class="block-section">
+                <h2>Популярное</h2>
+                <div >
 
 
-
-
-        <section class="block-section">
-            <h2>Популярное</h2>
-            <div class="block-main clearfix">
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
-
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                        </p>
-                    </div>
-                </arcticle>
-
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
-
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                        </p>
-                    </div>
-                </arcticle>
-
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
-
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                        </p>
-                    </div>
-                </arcticle>
-
-                <arcticle>
-                    <img th:src="@{image/123.jpg}" alt="">
-                    <div class="block-main-content">
-                        <h2>Название</h2>
-                        <h3>Жанр</h3>
-                        <p>Описание</p>
-
-                        <p class="product clearfix">
-                            <span class="available">в наличии</span>
-                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                        </p>
-                    </div>
-                </arcticle>
-            </div>
-
-            <div class="ListOfPopular clearfix">
-                <span> <a href="#">Посмотреть полный список</a></span>
-            </div>
-        </section>
-
-
-
-        <div class="container center-block-main">
-
-            <div class="slider">
-                <div class="slider__wrapper">
-                    <div class="slider__item">
-                        <div class="slider__content">
-                            <div class="slider__content_header">
-                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
-                                <span class="slider__content_section">Подборка №1</span>
+                    <div class="container">
+                        <div class="row mt-4">
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <h2 class="slider__content_title">текст текст текст</h2>
-                            <div class="slider__content_footer  clearfix">
-                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-4 my-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                    <div class="card-body">
+                                        <p class="card-title h2">
+                                            <a>Название книги</a>
+                                        </p>
+                                        <p class="card-author">
+                                            Авторы: <span ><span></span></span>
+                                        </p>
+                                        <p class="card-author">
+                                            Переводчики: <span><span></span></span>
+                                        </p>
+                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <div class="text-center line">
+                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="ListOfPopular clearfix">
+                        <span> <a href="#">Посмотреть полный список</a></span>
+                    </div>
+            </section>
+            <!---------------------------------- Популярное---------------------------->
+
+            <section class="block-section">
+                <h2>Подборки</h2>
+                <div >
+                    <div class="row my-5">
+                        <div class="col-12">
+                            <div class="card my-3">
+                                <h4 class="card-header">Подборка</h4>
+                                <div class="card-body">
+                                    <img class="img-thumbnail float-left mr-3" src="../imageforbook/AnnaKarenina.jpg" alt="">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed nisi, maxime quae ad adipisci sequi in sint repellendus esse inventore nulla consectetur numquam rerum possimus dolores nam voluptates alias velit, iste! Incidunt perferendis et iure, tenetur quia quisquam officia. Soluta?</p>
+                                    <p>Eum nesciunt id iste culpa ipsa tempora! Consequatur voluptatem recusandae tempore alias id consectetur eos voluptatum deleniti! Architecto eveniet nam assumenda error quisquam, soluta a quis harum recusandae magni enim, fugit aliquid hic aspernatur ipsa adipisci iure inventore modi maxime.</p>
+                                    <p>Ullam quos iure, beatae voluptates, sint saepe nobis ipsum, a fugit iste animi quae. Quis harum, temporibus officiis voluptatibus debitis voluptas modi a at, perferendis dicta nemo laborum voluptate sapiente quae aliquam, qui eveniet obcaecati molestiae quia odit. Sit, dolore!</p>
+                                    <p>Repellendus suscipit et aliquam ad in. Voluptatum maiores nesciunt eos nisi, mollitia pariatur officiis, aperiam omnis itaque iste ut saepe exercitationem amet rerum! Quaerat sunt sequi, corporis architecto repellendus, quasi molestias sapiente iste ducimus a placeat amet doloribus modi atque?</p>
+                                    <a href="#" class="btn btn-outline-primary btn-lg  float-right">Посмотреть подборку</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card my-3">
+                                <h4 class="card-header">Подборка</h4>
+                                <div class="card-body">
+                                    <img class="img-thumbnail float-left mr-3" src="../imageforbook/AnnaKarenina.jpg" alt="">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed nisi, maxime quae ad adipisci sequi in sint repellendus esse inventore nulla consectetur numquam rerum possimus dolores nam voluptates alias velit, iste! Incidunt perferendis et iure, tenetur quia quisquam officia. Soluta?</p>
+                                    <p>Eum nesciunt id iste culpa ipsa tempora! Consequatur voluptatem recusandae tempore alias id consectetur eos voluptatum deleniti! Architecto eveniet nam assumenda error quisquam, soluta a quis harum recusandae magni enim, fugit aliquid hic aspernatur ipsa adipisci iure inventore modi maxime.</p>
+                                    <p>Ullam quos iure, beatae voluptates, sint saepe nobis ipsum, a fugit iste animi quae. Quis harum, temporibus officiis voluptatibus debitis voluptas modi a at, perferendis dicta nemo laborum voluptate sapiente quae aliquam, qui eveniet obcaecati molestiae quia odit. Sit, dolore!</p>
+                                    <p>Repellendus suscipit et aliquam ad in. Voluptatum maiores nesciunt eos nisi, mollitia pariatur officiis, aperiam omnis itaque iste ut saepe exercitationem amet rerum! Quaerat sunt sequi, corporis architecto repellendus, quasi molestias sapiente iste ducimus a placeat amet doloribus modi atque?</p>
+                                    <a href="#" class="btn btn-outline-primary btn-lg  float-right">Посмотреть подборку</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="slider__item">
-                        <div class="slider__content">
-                            <div class="slider__content_header">
-                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
-                                <span class="slider__content_section">Подборка №1</span>
-                            </div>
-                            <h2 class="slider__content_title">текст текст текст</h2>
-                            <div class="slider__content_footer  clearfix">
-                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="slider__content">
-                            <div class="slider__content_header">
-                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
-                                <span class="slider__content_section">Подборка №1</span>
-                            </div>
-                            <h2 class="slider__content_title">текст текст текст</h2>
-                            <div class="slider__content_footer  clearfix">
-                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="slider__content">
-                            <div class="slider__content_header">
-                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
-                                <span class="slider__content_section">Подборка №1</span>
-                            </div>
-                            <h2 class="slider__content_title">текст текст текст</h2>
-                            <div class="slider__content_footer  clearfix">
-                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="slider__content">
-                            <div class="slider__content_header">
-                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
-                                <span class="slider__content_section">Подборка №1</span>
-                            </div>
-                            <h2 class="slider__content_title">текст текст текст</h2>
-                            <div class="slider__content_footer  clearfix">
-                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="slider__content">
-                            <div class="slider__content_header">
-                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
-                                <span class="slider__content_section">Подборка №1</span>
-                            </div>
-                            <h2 class="slider__content_title">текст текст текст</h2>
-                            <div class="slider__content_footer  clearfix">
-                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="slider__content">
-                            <div class="slider__content_header">
-                                <img class="slider__content_img" th:src="@{image/321.jpg}" alt="">
-                                <span class="slider__content_section">Подборка №1</span>
-                            </div>
-                            <h2 class="slider__content_title">текст текст текст</h2>
-                            <div class="slider__content_footer  clearfix">
-                                <span class="selection-btn"><button type="submit">ПОСМОТРЕТЬ ПОДБОРКУ</button></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="slider__control slider__control_left" href="#" role="button"></a>
-                <a class="slider__control slider__control_right" href="#" role="button"></a>
-            </div>
-
         </div>
 
 
@@ -439,8 +556,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-</body>
-        </html>
 
 
 
@@ -449,257 +564,6 @@
 
 
     <script type="text/javascript">
-
-
-
-
-
-
-
-
-
-
-
-
-'use strict';
-    var multiItemSlider = (function () {
-
-      function _isElementVisible(element) {
-        var rect = element.getBoundingClientRect(),
-          vWidth = window.innerWidth || doc.documentElement.clientWidth,
-          vHeight = window.innerHeight || doc.documentElement.clientHeight,
-          elemFromPoint = function (x, y) { return document.elementFromPoint(x, y) };
-        if (rect.right < 0 || rect.bottom < 0
-          || rect.left > vWidth || rect.top > vHeight)
-          return false;
-        return (
-          element.contains(elemFromPoint(rect.left, rect.top))
-          || element.contains(elemFromPoint(rect.right, rect.top))
-          || element.contains(elemFromPoint(rect.right, rect.bottom))
-          || element.contains(elemFromPoint(rect.left, rect.bottom))
-        );
-      }
-
-      return function (selector, config) {
-        var
-          _mainElement = document.querySelector(selector),
-          _sliderWrapper = _mainElement.querySelector('.slider__wrapper'),
-          _sliderItems = _mainElement.querySelectorAll('.slider__item'),
-          _sliderControls = _mainElement.querySelectorAll('.slider__control'),
-          _sliderControlLeft = _mainElement.querySelector('.slider__control_left'),
-          _sliderControlRight = _mainElement.querySelector('.slider__control_right'),
-          _wrapperWidth = parseFloat(getComputedStyle(_sliderWrapper).width),
-          _itemWidth = parseFloat(getComputedStyle(_sliderItems[0]).width),
-          _html = _mainElement.innerHTML,
-          _positionLeftItem = 0,
-          _transform = 0,
-          _step = _itemWidth / _wrapperWidth * 100,
-          _items = [],
-          _interval = 0,
-          _states = [
-            { active: false, minWidth: 0, count: 1 },
-            { active: false, minWidth: 576, count: 2 },
-            { active: false, minWidth: 992, count: 3 },
-            { active: false, minWidth: 1200, count: 4 },
-          ],
-          _config = {
-            isCycling: false,
-            direction: 'right',
-            interval: 5000,
-            pause: true
-          };
-
-        for (var key in config) {
-          if (key in _config) {
-            _config[key] = config[key];
-          }
-        }
-
-        _sliderItems.forEach(function (item, index) {
-          _items.push({ item: item, position: index, transform: 0 });
-        });
-
-        var _setActive = function () {
-          var _index = 0;
-          var width = parseFloat(document.body.clientWidth);
-          _states.forEach(function (item, index, arr) {
-            _states[index].active = false;
-            if (width >= _states[index].minWidth)
-              _index = index;
-          });
-          _states[_index].active = true;
-        }
-
-        var _getActive = function () {
-          var _index;
-          _states.forEach(function (item, index, arr) {
-            if (_states[index].active) {
-              _index = index;
-            }
-          });
-          return _index;
-        }
-
-        var position = {
-          getItemMin: function () {
-            var indexItem = 0;
-            _items.forEach(function (item, index) {
-              if (item.position < _items[indexItem].position) {
-                indexItem = index;
-              }
-            });
-            return indexItem;
-          },
-          getItemMax: function () {
-            var indexItem = 0;
-            _items.forEach(function (item, index) {
-              if (item.position > _items[indexItem].position) {
-                indexItem = index;
-              }
-            });
-            return indexItem;
-          },
-          getMin: function () {
-            return _items[position.getItemMin()].position;
-          },
-          getMax: function () {
-            return _items[position.getItemMax()].position;
-          }
-        }
-
-        var _transformItem = function (direction) {
-          var nextItem;
-          if (!_isElementVisible(_mainElement)) {
-            return;
-          }
-          if (direction === 'right') {
-            _positionLeftItem++;
-            if ((_positionLeftItem + _wrapperWidth / _itemWidth - 1) > position.getMax()) {
-              nextItem = position.getItemMin();
-              _items[nextItem].position = position.getMax() + 1;
-              _items[nextItem].transform += _items.length * 100;
-              _items[nextItem].item.style.transform = 'translateX(' + _items[nextItem].transform + '%)';
-            }
-            _transform -= _step;
-          }
-          if (direction === 'left') {
-            _positionLeftItem--;
-            if (_positionLeftItem < position.getMin()) {
-              nextItem = position.getItemMax();
-              _items[nextItem].position = position.getMin() - 1;
-              _items[nextItem].transform -= _items.length * 100;
-              _items[nextItem].item.style.transform = 'translateX(' + _items[nextItem].transform + '%)';
-            }
-            _transform += _step;
-          }
-          _sliderWrapper.style.transform = 'translateX(' + _transform + '%)';
-        }
-
-        var _cycle = function (direction) {
-          if (!_config.isCycling) {
-            return;
-          }
-          _interval = setInterval(function () {
-            _transformItem(direction);
-          }, _config.interval);
-        }
-
-        var _controlClick = function (e) {
-          e.preventDefault();
-          if (e.target.classList.contains('slider__control')) {
-            var direction = e.target.classList.contains('slider__control_right') ? 'right' : 'left';
-            _transformItem(direction);
-            clearInterval(_interval);
-            _cycle(_config.direction);
-          }
-        };
-
-        var _handleVisibilityChange = function () {
-          if (document.visibilityState === "hidden") {
-            clearInterval(_interval);
-          } else {
-            clearInterval(_interval);
-            _cycle(_config.direction);
-          }
-        }
-
-        var _refresh = function () {
-          clearInterval(_interval);
-          _mainElement.innerHTML = _html;
-          _sliderWrapper = _mainElement.querySelector('.slider__wrapper');
-          _sliderItems = _mainElement.querySelectorAll('.slider__item');
-          _sliderControls = _mainElement.querySelectorAll('.slider__control');
-          _sliderControlLeft = _mainElement.querySelector('.slider__control_left');
-          _sliderControlRight = _mainElement.querySelector('.slider__control_right');
-          _wrapperWidth = parseFloat(getComputedStyle(_sliderWrapper).width);
-          _itemWidth = parseFloat(getComputedStyle(_sliderItems[0]).width);
-          _positionLeftItem = 0;
-          _transform = 0;
-          _step = _itemWidth / _wrapperWidth * 100;
-          _items = [];
-          _sliderItems.forEach(function (item, index) {
-            _items.push({ item: item, position: index, transform: 0 });
-          });
-        }
-
-        var _setUpListeners = function () {
-          _mainElement.addEventListener('click', _controlClick);
-          if (_config.pause && _config.isCycling) {
-            _mainElement.addEventListener('mouseenter', function () {
-              clearInterval(_interval);
-            });
-            _mainElement.addEventListener('mouseleave', function () {
-              clearInterval(_interval);
-              _cycle(_config.direction);
-            });
-          }
-          document.addEventListener('visibilitychange', _handleVisibilityChange, false);
-          window.addEventListener('resize', function () {
-            var
-              _index = 0,
-              width = parseFloat(document.body.clientWidth);
-            _states.forEach(function (item, index, arr) {
-              if (width >= _states[index].minWidth)
-                _index = index;
-            });
-            if (_index !== _getActive()) {
-              _setActive();
-              _refresh();
-            }
-          });
-        }
-
-        // инициализация
-        _setUpListeners();
-        if (document.visibilityState === "visible") {
-          _cycle(_config.direction);
-        }
-        _setActive();
-
-        return {
-          right: function () {
-            _transformItem('right');
-          },
-          left: function () {
-            _transformItem('left');
-          },
-          stop: function () {
-            _config.isCycling = false;
-            clearInterval(_interval);
-          },
-          cycle: function () {
-            _config.isCycling = true;
-            clearInterval(_interval);
-            _cycle();
-          }
-        }
-
-      }
-    }());
-
-    var slider = multiItemSlider('.slider', {
-      isCycling: true
-    })
 
 
         var slides = document.querySelectorAll('#slides .slide');
@@ -711,6 +575,20 @@ function nextSlide(){
     currentSlide = (currentSlide+1)%slides.length;
     slides[currentSlide].className = 'slide showing';
 }
+
+
+function checkForm(form)
+{
+
+  if (document.getElementById("message").value == '')
+{
+
+  alert ('Заполните все поля');
+  return false;
+}
+
+}
+
 
     </script>
 </body>

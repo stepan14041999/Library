@@ -110,8 +110,6 @@
 
 
     <div class="center-block-main">
-
-
         <div class="header-top clearfix">
             <div class="container">
                 <div class="row">
@@ -175,6 +173,31 @@
                         сортировка
                     </div>
                     <div class="col-10">
+
+
+
+
+                        <div th:each="book:${books}">
+                            <div>
+                                <div>
+                                    <div>
+                                        <a href="'/order/'+${book.getBook_id()}">Hello
+                                            <img th:src="/img/+${book.getImage().getLink()}" th:width="200" th:height="200" alt="">
+                                        </a>
+                                    </div>
+                                    <p>
+                                        <a href="'/order/'+${book.getBook_id()}" th:text="${book.getName()}"></a>
+                                    </p>
+                                    <p>
+
+                                    </p>
+
+
+
+
+
+
+
                         <section class="block-section">
                             <h2>Жанр</h2>
                             <div class="block-main clearfix">

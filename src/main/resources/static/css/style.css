@@ -104,9 +104,13 @@ img{
     margin:0 auto;
 }
 .header-top{
-    padding:30px 0;
+    padding:20px 0;
     border-bottom:1px solid #eee;
 }
+.header-bottom{
+ border-bottom:1px solid #eee;
+}
+
 .logo{
 
     font-size:1.475em;
@@ -130,25 +134,30 @@ img{
     cursor: pointer;
     color:#eee;
 }
-.login{
-    float:right;
+col-sm login{
 
+}
+
+.login{
+
+
+float:right;
 }
 .login a {
     font-size:0.95em;
-    margin-left:20px;
+
 }
 
 .header-bottom{
     padding:10px 0;
 }
 .menu{
-    float:left;
+
 }
 .menu li{
     float:left;
     text-transform:uppercase;
-    margin-right:30px;
+
     font-size:0.875em;
 }
 .menu li a{
@@ -159,7 +168,7 @@ text-decoration:none;
 color:#f45a40;
 }
 .slider1{
-padding:20px 0;
+padding:10px 0;
 }
 #slides{
     position: relative;
@@ -462,13 +471,47 @@ float:right;
       margin-left: 4px;
       line-height: 40px;
     }
+.line button{
+margin:10px 0;
 
+}
 
+.line{
+border-top:1px solid #eee;
+}
 
-
-
-
-
+.card .carousel-item {
+ height: 200px;
+}
+.card .carousel-caption {
+ padding: 0;
+ right: 0;
+ left: 0;
+ color: #3d3d3d;
+}
+.card .carousel-caption h3 {
+ color: #3d3d3d;
+}
+.card .carousel-caption p {
+ line-height: 30px;
+}
+.card .carousel-caption .col-sm-3 {
+ display: flex;
+ align-items: center;
+}
+.card .carousel-caption .col-sm-9 {
+ text-align: left;
+}
+.navi a {
+ text-decoration:none;
+}
+a > .ico {
+ background-color: grey;
+ padding: 10px;
+}
+a:hover > .ico {
+ background-color: #666;
+}
 
 
 
