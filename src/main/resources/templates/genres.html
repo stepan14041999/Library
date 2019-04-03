@@ -18,28 +18,35 @@
     <!-- авторизация -->
     <div class="modal fade" id="avt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content ">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Авторизация</h5>
+                    <h5 class="modal-title">Авторизация</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form  method="post" class="ui-form" th:action="@{/login}">
+                    <form  method="post"  class="form-signin" th:action="@{/login}">
+                        <div class="form-label-group">
+                            <p th:if="${errorLogin!=''}" th:text="${errorLogin}"  id="messageLogin"></p>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" name="username" class="form-control" placeholder="Логин" id="username" required autofocus >
+                            <label for="username">Логин</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="password" name="password"  class="form-control" placeholder="Пароль" id="password12" required autofocus>
+                            <label for="password12">Пароль</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Запомнить пароль</label>
+                        </div>
 
-                        <p th:if="${error!=''}" th:text="${error}"></p>
-                        <div class="modal-body ">
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Войти</button>
 
-                            <label for="login" class="col-2">Логин</label>  <input type="text" name="username" class="col-6" id="login" required autocomplete="off" >
-                        </div>
-                        <div class="modal-body ">
-                            <label for="password" class="col-2">Пароль</label> <input type="password" name="password"  class="col-6" id="password" required autocomplete="off">
-                        </div>
-                        <div class="modal-footer">
-                            <p><input type="submit"  value="Войти"></p>
-                            <p><a th:href="@{/recoverPass}" class="recoverPass">Забыли пароль?</a></p><!--Изменяем на "#close"-->
-                        </div>
+                        <p class="pass"><a th:href="@{/recoverPass}" class="recoverPass ">Забыли пароль?</a></p><!--Изменяем на "#close"-->
+
 
                     </form>
                 </div>
@@ -60,42 +67,52 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form  method="post" class="ui-form" th:action="@{/login}">
-
-                        <p th:if="${error!=''}" th:text="${error}"></p>
-
-                        <div class="modal-body ">
-                            <label th:if="${user!=null}"  class="col-3" for="username">Логин<br></label> <input type="text" name="username"  class="col-6" id="username" th:if="${user!=null}" th:value="${user.getUsername()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="">
-                            <label th:if="${user==null}"  class="col-3" for="username1">Логин<br></label><input type="text" name="username" class="col-6" id="username1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="">
-
-                        </div>
-                        <div class="modal-body">
-                            <label for="password"  class="col-3">Пароль<br></label><input type="password" name="password" class="col-6" id="password" pattern=".{8,}"   required title="8 символов  минимум">
-                        </div>
-                        <div class="modal-body">
-                            <label th:if="${user!=null}"  class="col-3" for="fio">Фамилия Имя Отчество<br></label> <input type="text" name="fio"  class="col-6" id="fio" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
-                            <label th:if="${user==null}"  class="col-3" for="fio1">Фамилия Имя Отчество<br></label><input type="text" name="fio" class="col-6" id="fio1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
-                        </div>
-                        <div class="modal-body">
-                            <label th:if="${user!=null}"  class="col-3" for="email">E - mail<br></label>  <input type="email" name="email" class="col-6" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" required>
-                            <label for="email1" th:if="${user==null}"  class="col-3">E - mail<br></label>  <input type="email" name="email" class="col-6" id="email1" th:if="${user==null}" required>
-                        </div>
-                        <div class="modal-body">
-                            <label th:if="${user!=null}" id="specialLabel1"  class="col-3" for="birthday">Дата рождения<br></label> <input type="date" name="birthday" class="col-6" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
-                            <label id="specialLabel" for="birthday1" class="col-3" th:if="${user==null}">Дата рождения<br></label> <input type="date" name="birthday" class="col-6" th:if="${user==null}"  id="birthday1">
-                        </div>
-                        <div class="modal-body">
-                            <label th:if="${user!=null}" for="phone_number"  class="col-3">Номер телефона<br></label> <input type="number" name="phone_number" class="col-6" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" required title="Длина должна быть 10 цифр">
-                            <label th:if="${user==null}" for="phone_number1"  class="col-3">Номер телефона<br></label> <input type="number" name="phone_number"  class="col-6"th:if="${user==null}"  pattern="[0-9]{10}" id="phone_number1" required title="Длина должна быть 10 цифр">
-                        </div>
-                        <div class="modal-body">
-                            <label th:if="${user!=null}" for="address"  class="col-3">Адрес проживания<br></label> <input type="text" name="address" id="address" class="col-6" th:if="${user!=null}" th:value="${user.getAddress()}" required autocomplete="off">
-                            <label for="address1" th:if="${user==null}"  class="col-3">Адрес проживания<br></label> <input type="text" name="address" id="address1" class="col-6" th:if="${user==null}" required autocomplete="off">
-                        </div>
-                        <div class="modal-footer">
-                            <p><input type="submit" value="Зарегистрироваться"></p>
+                    <form  method="post" class="form-signin" th:action="@{/registration} ">
+                        <div class="form-label-group">
+                            <p th:if="${errorRegistration}" th:text="${errorRegistration}" id="messageRegistration"></p>
                         </div>
 
+                        <div class="form-label-group">
+                            <input type="text" name="login" class="form-control" id="login" th:if="${user!=null}" th:value="${user.getLogin()}" placeholder="Логин" required autofocus>
+                            <label  th:if="${user!=null}" for="login" >Логин</label>
+                            <input type="text" name="login" class="form-control" id="login1" th:if="${user==null}" placeholder="Логин" required autofocus>
+                            <label for="login1" th:if="${user==null}" >Логин</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="password" name="password" class="form-control" id="password" pattern=".{8,}"  placeholder="Пароль" required autofocus title="8 символов  минимум">
+                            <label for="password"  >Пароль</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" name="fio"  class="form-control" id="fio" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
+                            <label th:if="${user!=null}"   for="fio">Фамилия Имя Отчество</label>
+                            <input type="text" name="fio" class="form-control" id="fio1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
+                            <label th:if="${user==null}"   for="fio1">Фамилия Имя Отчество</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="email" name="email" class="form-control" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" placeholder="E - mail" required autofocus>
+                            <label th:if="${user!=null}"   for="email">E - mail</label>
+                            <input type="email" name="email" class="form-control" id="email1" th:if="${user==null}" placeholder="E - mail" required autofocus>
+                            <label for="email1" th:if="${user==null}"  >E - mail</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="date" name="birthday" class="form-control" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
+                            <label th:if="${user!=null}" id="specialLabel1"   for="birthday">Дата рождения</label>
+                            <input type="date" name="birthday" class="form-control" th:if="${user==null}"  id="birthday1">
+                            <label id="specialLabel" for="birthday1" th:if="${user==null}">Дата рождения</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="number" name="phone_number" class="form-control" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
+                            <label th:if="${user!=null}" for="phone_number"  >Номер телефона</label>
+                            <input type="number" name="phone_number"  class="form-control"th:if="${user==null}"  pattern="[0-9]{10}" id="phone_number1" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
+                            <label th:if="${user==null}" for="phone_number1"  >Номер телефона</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" name="address" id="address" class="form-control" th:if="${user!=null}" th:value="${user.getAddress()}" placeholder="Адрес проживания" required autofocus autocomplete="off">
+                            <label th:if="${user!=null}" for="address"  >Адрес проживания</label>
+                            <input type="text" name="address" id="address1" class="form-control" th:if="${user==null}" placeholder="Адрес проживания" required autofocus autocomplete="off">
+                            <label for="address1" th:if="${user==null}"  >Адрес проживания</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Зарегистрироваться</button>
                     </form>
                 </div>
             </div>
@@ -110,11 +127,13 @@
 
 
     <div class="center-block-main">
+
+
         <div class="header-top clearfix">
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <p class ="logo"><a href="#">LIBRARY</a></p>
+                        <p class ="h2"><a href="#">LIBRARY</a></p>
                     </div>
                     <div class="col-sm">
                         <form th:action="@{/find}" method="post">
@@ -129,271 +148,126 @@
                     </div>
                     <div class="col-sm">
                         <div class="login">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#avt">
-                                Вход
-                            </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reg">
-                                Регистрация
-                            </button>
+                            <div class="row">
+                                <div class="col">
+                                    <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" data-toggle="modal" data-target="#avt">
+                                        Вход
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" data-toggle="modal" data-target="#reg">
+                                        Регистрация
+                                    </button>
+                                </div>
 
+                                <form sec:authorize="hasAnyAuthority('USER')" th:action="@{/lk}">
+                                    <div class="col">
+                                        <button type="submit"  class="btn btn-primary" data-toggle="modal">
+                                            Личный кабинет
+                                        </button>
+                                    </div>
+                                </form>
+
+
+                                <form sec:authorize="hasAnyAuthority('ADMIN','LIBRARIAN')" th:action="@{/lkstaff}">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal">
+                                            Личный кабинет
+                                        </button>
+                                    </div>
+                                </form>
+
+
+                                <form sec:authorize="isAuthenticated()" th:action="@{/logout}">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal">
+                                            Выйти
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
+        <div class="header-bottom">
+            <nav>
+                <ul class="nav nav-pills menu">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Жанры</a>
+                        <ul class="dropdown-menu">
+                            <li th:each="genre:${genres}">
+                                <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Новинки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Популярное</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Подборки</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
-            <div class="header-bottom">
-                <nav>
-                    <ul class="nav nav-pills menu">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Жанры</a>
-                            <ul class="dropdown-menu">
+</header>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+тут будет список жанров
+                            <ul class="dbl-border">
                                 <li th:each="genre:${genres}">
-                                    <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
+                                    <a th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Новинки</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Популярное</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Подборки</a>
-                        </li>
-                    </ul>
-                </nav>
+                        </div>
+
+
+            <div class="col-10">
+    <section class="block-section">
+    <div class="container">
+        <div class="row mt-4" >
+            <div class="col-sm-4 my-3" th:each="book:${books}">
+                <div class="card">
+                    <img class="card-img-top" th:src="'/img/'+${book.getImage().getLink()}"  alt="">
+                    <div class="card-body">
+                        <p class="card-title h2">
+                            <a th:text="${book.getName()}"></a>
+                        </p>
+                        <p class="card-author">
+                            <b>Авторы:</b> <span th:each="author:${book.getAuthors()}"><span th:text="${author.getFio()}"></span></span>
+                        </p>
+                        <p class="card-author">
+                           <b> Переводчики:</b> <span th:each="authorForeign:${book.getForeignAuthors()}"><span th:text="${authorForeign.getFio()}"></span></span>
+                        </p>
+                        <b>Описание:</b>
+                        <div class="scroll b1">
+                        <p class="card-desc" th:text="${book.getDescription()}"></p>
+                        </div>
+                        <div class="text-center line">
+                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
+                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-2">
-                        сортировка
-                    </div>
-                    <div class="col-10">
+    </div>
+    </section>
 
-
-
-
-                        <div th:each="book:${books}">
-                            <div>
-                                <div>
-                                    <div>
-                                        <a href="'/order/'+${book.getBook_id()}">Hello
-                                            <img th:src="/img/+${book.getImage().getLink()}" th:width="200" th:height="200" alt="">
-                                        </a>
-                                    </div>
-                                    <p>
-                                        <a href="'/order/'+${book.getBook_id()}" th:text="${book.getName()}"></a>
-                                    </p>
-                                    <p>
-
-                                    </p>
-
-
-
-
-
-
-
-                        <section class="block-section">
-                            <h2>Жанр</h2>
-                            <div class="block-main clearfix">
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                            </div>
-
-
-                        </section>
-                        <section class="block-section">
-
-                            <div class="block-main clearfix">
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                            </div>
-
-
-                        </section>
-                        <section class="block-section">
-
-                            <div class="block-main clearfix">
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                                <arcticle>
-                                    <img th:src="@{image/123.jpg}" alt="">
-                                    <div class="block-main-content">
-                                        <h2>Название</h2>
-                                        <h3>Жанр</h3>
-                                        <p>Описание</p>
-
-                                        <p class="product clearfix">
-                                            <span class="available">в наличии</span>
-                                            <span class="booking-btn"><button type="submit">ЗАБРАНИРОВАТЬ</button></span>
-                                        </p>
-                                    </div>
-                                </arcticle>
-
-                            </div>
-
-
-                        </section>
-                    </div>
-
-                </div>
-
-
+            </div>
         </div>
-</div>
+    </div>
 
 
 
@@ -410,8 +284,7 @@
 
 
 
-
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
