@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.sstu.library.service.UserService;
 
 @Configuration
@@ -22,18 +24,21 @@ public class Config extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/registration", "image/**", "css/**", "/actuator/**").permitAll()
-                .anyRequest()
-                .authenticated()
+                    .antMatchers("/","/genre/**","/imageforbook/**", "/registration","/login", "/image/**", "/css/**", "/actuator/**","/genres","/img/**").permitAll()
+                    .anyRequest()
+                    .authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/")
+                    .loginProcessingUrl("/login")
+                    .failureHandler(customAuthenticationFailureHandler())
+                    .defaultSuccessUrl("/")
+                    .permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .permitAll();
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/")
+                    .permitAll();
     }
 
     @Bean
@@ -45,5 +50,10 @@ public class Config extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)
                 .passwordEncoder(bCryptPasswordEncoder());
+    }
+
+    @Bean
+    public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
     }
 }

@@ -39,8 +39,10 @@ public class Book {
     @ManyToOne(optional = false)
     @JoinColumn(name="LEVEL_ID")
     private Level level;
-//    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER)
-//    private Book book;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany()
+    @JoinTable(name = "BOOKTOSETS",joinColumns = @JoinColumn(name = "BOOK_ID"),inverseJoinColumns = @JoinColumn(name="SETS_ID"))
+    private Collection<Set> sets;
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany()
     @JoinTable(name = "BOOKTOAUTHOR",joinColumns = @JoinColumn(name="BOOK_ID"),inverseJoinColumns =@JoinColumn(name="AUTHOR_ID"))
@@ -55,7 +57,8 @@ public class Book {
     private Collection<Author> foreignAuthors;
     @ManyToMany(mappedBy = "booksFavorites")
     private Collection<User> usersFavorites;
-
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    private LocalDate date_publish;
 
     @Override
     public String toString() {
