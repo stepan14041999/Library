@@ -1,5 +1,6 @@
 package ru.sstu.library.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,12 @@ import ru.sstu.library.service.GenreService;
 public class GenreController {
     @Autowired
     private GenreService genreService;
+
+    @GetMapping("/")
+    public String getAll(Model model){
+        model.addAttribute("books",genreService.getAllBooks());
+        return "genres";
+    }
 
     @GetMapping("/{genre}")
     public String booksByGenre(@PathVariable Genre genre, Model model){

@@ -27,6 +27,8 @@ public class LibraryService {
     private OrderRepo orderRepo;
     @Autowired
     private SetRepo setRepo;
+    @Autowired
+    private BookRepo bookRepo;
 
     public List<News> getAllNews(){
         List<News> news=(List<News>) newsRepo.findAll();
@@ -57,11 +59,10 @@ public class LibraryService {
     }
     public List<Book> getLastTenBooks()
     {
-        List<Book> books = new ArrayList<>();
-        books.stream()
-                .map(x->x.getDate_publish())
-                .sorted()
-                .limit(10)
+        List<Book> books = (List<Book>) bookRepo.findAll();
+        books=books.stream()
+                .sorted((x,y)->-x.getDate_publish().compareTo(y.getDate_publish()))
+                .limit(6)
                 .collect(Collectors.toList());
         return books;
     }
