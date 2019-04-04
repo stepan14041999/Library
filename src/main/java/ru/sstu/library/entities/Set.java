@@ -15,6 +15,7 @@ public class Set {
     @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer set_id;
+    private String name;
     private String description;
     @OneToOne(optional = false)
     @JoinColumn(name = "IMAGE_ID")
