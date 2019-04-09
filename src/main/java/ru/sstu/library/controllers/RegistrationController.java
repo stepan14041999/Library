@@ -13,22 +13,28 @@ import ru.sstu.library.service.RegistrationService;
 
 @Controller
 public class RegistrationController {
-   @Autowired
+    @Autowired
     private RegistrationService registrationService;
+    @Autowired
+    private LibraryService libraryService;
     @Autowired
     private BCryptPasswordEncoder encoder;
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model){
-        User userFromDb=registrationService.getUserByLogin(user.getLogin());
-        if(userFromDb!=null){
-            model.addAttribute("errorRegistration","Логин уже занят!");
-            model.addAttribute("user",user);
+    public String addUser(User user, Model model) {
+        User userFromDb = registrationService.getUserByLogin(user.getLogin());
+        if (userFromDb != null) {
+            model.addAttribute("errorRegistration", "Логин уже занят!");
+            model.addAttribute("news", libraryService.getAllNews());
+            model.addAttribute("genres", libraryService.getAllGenres());
+            model.addAttribute("popular", libraryService.getPopular());
+            model.addAttribute("newBooks", libraryService.getLastTenBooks());
+            model.addAttribute("user", user);
             return "index";
         }
         user.setPassword(encoder.encode(user.getPassword()));
         user.setRole(registrationService.getRoleByName("USER"));
         registrationService.saveUser(user);
-        return "index";
+        return "redirect:/";
     }
 }
