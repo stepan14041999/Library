@@ -22,4 +22,11 @@ public class GenreService {
                 .collect(Collectors.toList());
         return booksByGenre;
     }
+
+
+    public List<Book> getAllBooks(){
+        List<Book> books=(List<Book>) bookRepo.findAll();
+        return books;
+    }
+
 }

@@ -133,7 +133,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <p class ="h2"><a href="#">LIBRARY</a></p>
+
+
+
+                        <p class ="h2"><a th:href="@{/}">LIBRARY</a></p>
+
                     </div>
                     <div class="col-sm">
                         <form th:action="@{/find}" method="post">
@@ -247,7 +251,11 @@
                         <p class="card-author">
                             <b>Авторы:</b> <span th:each="author:${book.getAuthors()}"><span th:text="${author.getFio()}"></span></span>
                         </p>
+
                         <p class="card-author">
+
+                        <p class="card-author" th:if="${book.getForeignAuthors().size()>0}">
+
                            <b> Переводчики:</b> <span th:each="authorForeign:${book.getForeignAuthors()}"><span th:text="${authorForeign.getFio()}"></span></span>
                         </p>
                         <b>Описание:</b>

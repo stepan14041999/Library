@@ -523,7 +523,7 @@ a:hover > .ico {
 }
 
 .b1 {
-    height: calc(15vh - 72px);
+    height: calc(20vh - 72px);
     flex:1;
     overflow: hidden;
 }

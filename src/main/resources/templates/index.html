@@ -133,7 +133,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <p class ="h2"><a href="#">LIBRARY</a></p>
+
+
+                        <p class ="h2"><a th:href="@{/}">LIBRARY</a></p>
+
                     </div>
                     <div class="col-sm">
                         <form th:action="@{/find}" method="post">
@@ -244,20 +247,25 @@
 
                     <div class="container">
                         <div class="row mt-4">
-                            <div class="col-sm-4 my-3">
+
+
+                            <div class="col-sm-4 my-3" th:each="book:${newBooks}">
                                 <div class="card">
-                                <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
+                                <img class="card-img-top" th:src="'/img/'+${book.getImage().getLink()}"  alt="">
                                     <div class="card-body">
                                             <p class="card-title h2">
-                                                <a>Название книги</a>
+                                                <a th:href="'/book/'+${book.getBook_id()}" th:text="${book.getName()}"></a>
                                                 </p>
-                                            <p class="card-author">
-                                                Авторы: <span ><span></span></span>
-                                            </p>
-                                            <p class="card-author">
-                                                Переводчики: <span><span></span></span>
-                                            </p>
-                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
+                                        <p class="card-author">
+                                            <b>Авторы:</b> <span th:each="author:${book.getAuthors()}"><span th:text="${author.getFio()}"></span></span>
+                                        </p>
+                                        <p class="card-author" th:if="${book.getForeignAuthors().size()>0}">
+                                            <b> Переводчики:</b> <span th:each="authorForeign:${book.getForeignAuthors()}"><span th:text="${authorForeign.getFio()}"></span></span>
+                                        </p>
+                                        <b>Описание:</b>
+                                        <div class="scroll b1">
+                                            <p class="card-desc" th:text="${book.getDescription()}"></p>
+                                        </div>
                                         <div class="text-center line">
                                         <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
                                         <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
@@ -267,127 +275,17 @@
                                     </div>
 
 
-                            <div class="col-sm-4 my-3">
-                                <div class="card">
-                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
-                                    <div class="card-body">
-                                        <p class="card-title h2">
-                                            <a>Название книги</a>
-                                        </p>
-                                        <p class="card-author">
-                                            Авторы: <span ><span></span></span>
-                                        </p>
-                                        <p class="card-author">
-                                            Переводчики: <span><span></span></span>
-                                        </p>
-                                        <p class="card-desc em" >Описание книги Описание книгиописание книги описание книги описание книги описание книги</p>
-                                        <div class="text-center line">
-                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
-                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-
-                            <div class="col-sm-4 my-3">
-                                <div class="card">
-                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
-                                    <div class="card-body">
-                                        <p class="card-title h2">
-                                            <a>Название книги</a>
-                                        </p>
-                                        <p class="card-author">
-                                            Авторы: <span ><span></span></span>
-                                        </p>
-                                        <p class="card-author">
-                                            Переводчики: <span><span></span></span>
-                                        </p>
-                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
-                                        <div class="text-center line">
-                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
-                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-sm-4 my-3">
-                                <div class="card">
-                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
-                                    <div class="card-body">
-                                        <p class="card-title h2">
-                                            <a>Название книги</a>
-                                        </p>
-                                        <p class="card-author">
-                                            Авторы: <span ><span></span></span>
-                                        </p>
-                                        <p class="card-author">
-                                            Переводчики: <span><span></span></span>
-                                        </p>
-                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
-                                        <div class="text-center line">
-                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
-                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-sm-4 my-3">
-                                <div class="card">
-                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
-                                    <div class="card-body">
-                                        <p class="card-title h2">
-                                            <a>Название книги</a>
-                                        </p>
-                                        <p class="card-author">
-                                            Авторы: <span ><span></span></span>
-                                        </p>
-                                        <p class="card-author">
-                                            Переводчики: <span><span></span></span>
-                                        </p>
-                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
-                                        <div class="text-center line">
-                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
-                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-sm-4 my-3">
-                                <div class="card">
-                                    <img class="card-img-top" src="../imageforbook/AnnaKarenina.jpg"  alt="">
-                                    <div class="card-body">
-                                        <p class="card-title h2">
-                                            <a>Название книги</a>
-                                        </p>
-                                        <p class="card-author">
-                                            Авторы: <span ><span></span></span>
-                                        </p>
-                                        <p class="card-author">
-                                            Переводчики: <span><span></span></span>
-                                        </p>
-                                        <p class="card-desc em" >Описание книги описание книги описание книги описание книги описание книги</p>
-                                        <div class="text-center line">
-                                            <button type="button" class="btn btn-outline-primary btn-lg btn-block">Забронировать</button>
-                                            <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
 
 
             <div class="ListOfPopular clearfix">
-               <span> <a href="#">Посмотреть полный список</a></span>
+
+
+               <span> <a th:href="@{/genre/}">Посмотреть полный список</a></span>
+
             </div>
         </section>
             <!---------------------------------- Последние поступления---------------------------->
@@ -653,7 +551,7 @@ if (uscont1.trim().length != 0) {
 
 
 
-    </script>
+
 </body>
 </html>
 
