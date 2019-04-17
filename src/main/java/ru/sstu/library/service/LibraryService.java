@@ -26,10 +26,8 @@ public class LibraryService {
     @Autowired
     private OrderRepo orderRepo;
     @Autowired
-
     private SetRepo setRepo;
     @Autowired
-
     private BookRepo bookRepo;
 
     public List<News> getAllNews(){
@@ -43,13 +41,6 @@ public class LibraryService {
         genres.sort(Comparator.comparing(Genre::getName));
         return genres;
     }
-
-
-    public List<Book> getAllBooks(){
-        List<Book> books=(List<Book>) bookRepo.findAll();
-        return books;
-    }
-
     public List<Book> getPopular(){
         List<Order> orderList=(List<Order>) orderRepo.findAll();
         List<Book> books;
@@ -81,5 +72,4 @@ public class LibraryService {
         sets.sort(Comparator.comparing(ru.sstu.library.entities.Set::getName));
         return sets;
     }
-
 }

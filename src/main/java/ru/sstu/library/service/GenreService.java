@@ -23,10 +23,8 @@ public class GenreService {
         return booksByGenre;
     }
 
-
     public List<Book> getAllBooks(){
         List<Book> books=(List<Book>) bookRepo.findAll();
         return books;
     }
-
 }

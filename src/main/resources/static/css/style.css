@@ -7,6 +7,11 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, 
 	background: transparent;      /* чтобы не проскакивали левые фоны, установленные по умолчанию */
 	font-size: 100%;                     /* размер шрифта всем одинаковый */
 }
+element.style {
+.fa-search:before {
+    content: none;
+}
+}
     *::before,
     *::after {
       box-sizing: border-box;

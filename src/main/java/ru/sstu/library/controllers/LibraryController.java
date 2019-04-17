@@ -22,10 +22,8 @@ public class LibraryController {
         }
         model.addAttribute("news",libraryService.getAllNews());
         model.addAttribute("genres",libraryService.getAllGenres());
-
         model.addAttribute("popular",libraryService.getPopular());
         model.addAttribute("newBooks",libraryService.getLastTenBooks());
-
         model.addAttribute("message",false);
         return "index";
 
