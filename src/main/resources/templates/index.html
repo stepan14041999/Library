@@ -133,7 +133,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
+
+
+
                         <p class ="h2"><a th:href="@{/}">LIBRARY</a></p>
+
+
+
+
                     </div>
                     <div class="col-sm">
                         <form th:action="@{/find}" method="post">
@@ -244,6 +251,10 @@
 
                     <div class="container">
                         <div class="row mt-4">
+
+
+
+
                             <div class="col-sm-4 my-3" th:each="book:${newBooks}">
                                 <div class="card">
                                 <img class="card-img-top" th:src="'/img/'+${book.getImage().getLink()}"  alt="">
@@ -271,12 +282,20 @@
 
 
 
+
                         </div>
                     </div>
 
 
             <div class="ListOfPopular clearfix">
+
+
+
                <span> <a th:href="@{/genre/}">Посмотреть полный список</a></span>
+
+
+               <span> <a th:href="@{/genre/}">Посмотреть полный список</a></span>
+
             </div>
         </section>
             <!---------------------------------- Последние поступления---------------------------->
@@ -542,7 +561,7 @@ if (uscont1.trim().length != 0) {
 
 
 
-    </script>
+
 </body>
 </html>
 

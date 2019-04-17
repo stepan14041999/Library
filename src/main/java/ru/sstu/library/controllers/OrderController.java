@@ -11,8 +11,8 @@ import ru.sstu.library.entities.Book;
 @RequestMapping("/order")
 public class OrderController {
     @GetMapping("/{book}")
-    public String getPageBook(@PathVariable Book book, Model model){
-        model.addAttribute("book",book);
+    public String getPageBook(@PathVariable Book book, Model model) {
+        model.addAttribute("book", book);
         return "book";
     }
 }
