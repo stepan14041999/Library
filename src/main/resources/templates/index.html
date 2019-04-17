@@ -260,7 +260,7 @@
                                 <img class="card-img-top" th:src="'/img/'+${book.getImage().getLink()}"  alt="">
                                     <div class="card-body">
                                             <p class="card-title h2">
-                                                <a th:href="'/book/'+${book.getBook_id()}" th:text="${book.getName()}"></a>
+                                                <a th:href="'/order/'+${book.getBook_id()}" th:text="${book.getName()}"></a>
                                                 </p>
                                         <p class="card-author">
                                             <b>Авторы:</b> <span th:each="author:${book.getAuthors()}"><span th:text="${author.getFio()}"></span></span>

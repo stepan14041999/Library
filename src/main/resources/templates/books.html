@@ -131,28 +131,18 @@
 
     <div class="center-block-main">
 
-
         <div class="header-top clearfix">
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
-
-
-
-
                         <p class ="h2"><a th:href="@{/}">LIBRARY</a></p>
-
-
-
-
                     </div>
                     <div class="col-sm">
                         <form th:action="@{/find}" method="post">
                             <div class="input-group search">
-                                <form th:action="@{/find}" method="post">
                                     <input type="text" class="form-control" name="info" id="search_box"
                                            placeholder="Введите название книги ">
-                                    <div class="input-group-addon" ><i class="fa "></i></div>
+                                    <div class="input-group-addon" ><i class="fa"></i></div>
                                     <button class="btn btn-outline-secondary" type="button">ИСКАТЬ</button>
                             </div>
                         </form>
@@ -253,27 +243,23 @@
                             <input type="hidden" th:value="${book.getBook_id()}" id="id" name="book_id">
                             <!--<div class="wrapForLabel">Начальная дата</div>-->
                             <div class="wrapForDate">
-
-
-
                                 <div class="form-group ">
                                     <div class="input-group date dateWidth" id="datetimepicker1" data-target-input="nearest">
                                         <label for="start" class="forLabel" th:text="${textStartDate}"></label>
-                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                                        <input type="text" name="date_start" id="start" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
                                         <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="wrapForDate" id="endDate">
 
 
                                 <div class="form-group">
                                     <div class="input-group date dateWidth" id="datetimepicker2" data-target-input="nearest">
-                                        <label for="end" class="forLabel">Конечная дата:</label><input type="text" name="date_end" id="end" class="form-control" />
+                                        <label for="end" class="forLabel">Конечная дата:</label>
+                                        <input type="text" name="date_end" id="end" class="form-control" />
                                         <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -333,9 +319,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 
 
 
