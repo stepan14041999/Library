@@ -40,9 +40,9 @@ public class LibraryController {
 //        model.addAttribute("books",libraryService.getAllBooks());
 //        return "test";
 //    }
-//    @GetMapping("/genres")
-//    public String testImage1(Model model){
-//
-//        return "genres";
-//    }
+    @GetMapping("/InfoOrder")
+    public String testImage1(Model model){
+
+        return "InfoOrder";
+    }
 }

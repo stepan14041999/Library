@@ -121,6 +121,9 @@ img{
     font-size:1.475em;
 
 }
+
+
+
 .search{
 
 
@@ -128,17 +131,35 @@ img{
 .search input {
 
     height: 42px;
+        width: 250px;
     padding-left: 10px;
     border: 2px solid #f45a40;
     outline: none;
+    border-radius: 0.4rem;
+
 
 }
 .search button {
     border-color:#f45a40;
+    border-radius: 0.4rem;
+    height:43px;
+    border:0px;
     background: #f45a40;
     cursor: pointer;
     color:#eee;
+    margin-bottom:3px;
 }
+.search button:hover{
+
+    background: #ed3c1e;
+    cursor: pointer;
+    color:#fff;
+}
+
+
+
+
+
 .col-sm .login .col{
 padding:0 3px;
 }
@@ -647,4 +668,79 @@ font-weight: 300;
   font-size: 1.1rem;
   text-align:center;
   padding-top:12px;
+}
+
+
+
+
+
+
+
+
+#search_advice_wrapper2{
+    display:none;
+    width: 230px;
+    background-color: rgb(80, 80, 114);
+    color: rgb(255, 227, 189);
+    -moz-opacity: 0.95;
+    opacity: 0.95;
+    -ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter:alpha(opacity=95);
+    z-index:999;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+}
+
+#search_advice_wrapper2 .advice_variant{
+    cursor: pointer;
+    padding: 5px;
+    text-align: left;
+}
+#search_advice_wrapper2 .advice_variant:hover{
+    color:#FEFFBD;
+    background-color:#818187;
+}
+#search_advice_wrapper2 .active{
+    cursor: pointer;
+    padding: 5px;
+    color:#FEFFBD;
+    background-color:#818187;
+}
+
+#search_box{
+
+}
+
+#search_advice_wrapper{
+    display:none;
+    width: 250px;
+    background-color: #f45a40;
+    color: #fff;
+    -moz-opacity: 0.95;
+    opacity: 0.95;
+    -ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter:alpha(opacity=95);
+    z-index:999;
+    position: absolute;
+    top: 41px;
+    left: 0px;
+}
+
+#search_advice_wrapper .advice_variant{
+    cursor: pointer;
+    padding: 5px;
+    text-align: left;
+}
+#search_advice_wrapper .advice_variant:hover{
+
+    background-color:#ed3c1e;
+}
+#search_advice_wrapper .active{
+    cursor: pointer;
+    padding: 5px;
+    color:#fff;
+    background-color:#ed3c1e;
 }

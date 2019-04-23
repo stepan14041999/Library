@@ -145,11 +145,12 @@
                     <div class="col-sm">
                         <div class="input-group search">
                             <form th:action="@{/find}" method="post">
-                            <input type="text" class="form-control" name="info" id="search_box"
+                            <input type="text"  name="info" id="search_box"
                                    placeholder="Введите название книги " autocomplete="off">
-                            <div class="input-group-addon" ><i class="fa fa-search"></i></div>
-                            <button class="btn btn-outline-secondary" type="submit">ИСКАТЬ</button>
+                                <button class="btn btn-outline-secondary" type="submit">ИСКАТЬ</button>
                             </form>
+
+
                             <div id="search_advice_wrapper"></div>
                         </div>
                     </div>

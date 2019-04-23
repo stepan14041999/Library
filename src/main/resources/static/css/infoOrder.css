@@ -1,0 +1,42 @@
+
+
+.d16news h3 {
+    display: table;
+    width: auto;
+    margin: 15px auto;
+    letter-spacing: 2px;
+    font-size: 25px;
+}
+
+
+
+.wrapTable{
+    
+
+    height: 100%;
+}
+table {
+    margin:auto;
+    font-size: 16px;
+    border-collapse: collapse;
+
+}
+th, td:first-child {
+    background: #f45a40;
+    color: white;
+    padding: 10px 20px;
+}
+.tbl th, td {
+    padding: 10px;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+    color:#fff;
+    text-align: center;
+}
+td {
+    background: #ed3c1e;
+}
+th:first-child, td:first-child {
+    text-align: left;
+}

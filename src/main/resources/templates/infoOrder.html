@@ -5,8 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-    <link href="../static/css/book.css" th:href="@{/css/book.css}" rel="stylesheet" />
-    <link href="../static/css/genres.css" th:href="@{/css/genres.css}" rel="stylesheet" />
+    <link href="../static/css/book.css" th:href="@{/css/InfoOrder.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
@@ -233,98 +232,41 @@
     </header>
 
 
-
-
-    <div class="container" >
-        <div class="row">
-            <div class="col-2">
-                <ul class="vertical-menu">
-                    <li>
-                        <a href="#">текст</a>
-                    <a href="#">текст</a>
-                    <a href="#">текст</a>
-                    <a href="#">текст</a><a>текст</a>
-                    <a href="#">текст</a>
-                    <a href="#">текст</a>
-
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-10">
-                <section class="block-section">
-            <div class="mainDiv">
-                <div class="wrapForOrder">
-                    <div class="descrBook">
-                        <div>
-                            <h1 class="h1Titile h2" th:text="${book.getName()}">dssd</h1>
-                            <div class="col-6">
-                            <img class="imgBook" th:src="'/img/'+${book.getImage().getLink()}">
-                            </div>
-
-                            <div class="nameAuthor">Авторы: <span th:each="author:${book.getAuthors()}" th:text="${author.getFio()+' '}"></span></div>
-                            <div class="nameAuthor">Жанры: <span th:each="genre:${book.getGenres()}" th:text="${genre.getName()+' '}"></span></div>
-                            <div class="descr" th:text="${book.getDescription()}"></div>
-                        </div>
-                        <form th:action="@{/order}" method="post" class="ui-form">
-                            <div th:if="${error!=''}" th:text="${error}" class="infoMessage"></div>
-                            <input type="hidden" th:value="${book.getBook_id()}" id="id" name="book_id">
-
-                            <!--<div class="wrapForLabel">Начальная дата</div>-->
-                            <div class="wrapForDate">
-                                <div class="form-group ">
-                                    <div class="input-group date dateWidth" id="datetimepicker1" data-target-input="nearest">
-                                        <label for="start" class="forLabel">Начальная дата:</label>
-                                        <input type="text" name="date_start" id="start" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wrapForDate" id="endDate">
-
-
-                                <div class="form-group">
-                                    <div class="input-group date dateWidth" id="datetimepicker2" data-target-input="nearest">
-                                        <label for="end" class="forLabel">Конечная дата:</label>
-                                        <input type="text" name="date_end" id="end" class="form-control" />
-                                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="wrapForDate" id="user" sec:authorize="hasAuthority('LIBRARIAN')">
-                                <div class="form-group">
-                                    <div class="input-group date dateWidth">
-                                        <label for="usr" class="forLabel">Пользователь:</label><input type="text" name="user" required  autocomplete="off" id="usr" class="form-control"/>
-                                    </div>
-                                    <div id="search_advice_wrapper2"></div>
-                                </div>
-                            </div>
-                            <div class="form-label-group">
-
-                            <input sec:authorize="isAuthenticated()" type="submit" value="Бронирование книги" class="form-control">
-
-                            </div>
-                            <div class="form-label-group">
-                            <input sec:authorize="!isAuthenticated()" disabled type="submit" value="Необходима авторизация" class="form-control">
-                            </div>
-                        </form>
-                    </div>
+    <main>
+        <div class="mainDiv">
+            <div class="wrapForOrder">
+                <div class="wrapForTitle">
+                    <div class="d16news"><h3><span>Информация о бронировании</span></h3></div>
                 </div>
-            </div>
-                </section>
+                <div class="wrapTable">
+                    <table class="tbl">
+                        <tr><td>Ваш номер заказа:</td> <td>123213123231</td></tr>
+                        <tr><td>Название книги:</td> <td>Война и мир</td></tr>
+                        <tr><td>Начало бронирования:</td> <td>23.06.2019</td></tr>
+                        <tr><td>Окончание бронирования:</td><td>28.06.2019</td></tr>
+                    </table>
+
+                </div>
+
             </div>
         </div>
-    </div>
-
-
-    </div>
+    </main>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -359,7 +301,7 @@
 
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
     $(function () {
         $('#datetimepicker1').datetimepicker({
             locale: 'ru',
@@ -375,7 +317,7 @@
         });
     });
 </script>
-<script type="text/javascript">
+    <script type="text/javascript">
     $(document).ready(function() {
         $('#datetimepicker1').on('dp.show',function () {
             $id_book=$('#id').val();
@@ -457,5 +399,5 @@
 
 
 
-</body>
+    </body>
 </html>

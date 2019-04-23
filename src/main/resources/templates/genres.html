@@ -137,7 +137,6 @@
 
 
 
-
                         <p class ="h2"><a th:href="@{/}">LIBRARY</a></p>
 
 
@@ -145,15 +144,16 @@
 
                     </div>
                     <div class="col-sm">
-                        <form th:action="@{/find}" method="post">
-                            <div class="input-group search">
-                                <form th:action="@{/find}" method="post">
-                                    <input type="text" class="form-control" name="info" id="search_box"
-                                           placeholder="Введите название книги ">
-                                    <div class="input-group-addon" ><i class="fa fa-search"></i></div>
-                                    <button class="btn btn-outline-secondary" type="button">ИСКАТЬ</button>
-                            </div>
-                        </form>
+                        <div class="input-group search">
+                            <form th:action="@{/find}" method="post">
+                                <input type="text"  name="info" id="search_box"
+                                       placeholder="Введите название книги " autocomplete="off">
+                                <button class="btn btn-outline-secondary" type="submit">ИСКАТЬ</button>
+                            </form>
+
+
+                            <div id="search_advice_wrapper"></div>
+                        </div>
                     </div>
                     <div class="col-sm">
                         <div class="login">
@@ -272,7 +272,7 @@
                         <p class="card-desc" th:text="${book.getDescription()}"></p>
                         </div>
                         <div class="text-center line">
-                            <p class="btn btn-outline-success btn-lg btn-block"><a  th:href="'/book/'+${book.getBook_id()}">Забронировать</a></p>
+                            <p class="btn btn-outline-success btn-lg btn-block"><a  th:href="'/order/'+${book.getBook_id()}">Забронировать</a></p>
                             <button type="button" class="btn btn-outline-success btn-lg btn-block">В избранное</button>
                         </div>
                     </div>
