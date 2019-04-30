@@ -10,19 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import ru.sstu.library.entities.Book;
 import ru.sstu.library.entities.Order;
 import ru.sstu.library.entities.User;
+import ru.sstu.library.service.LibraryService;
 import ru.sstu.library.service.OrderService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private LibraryService libraryService;
 
     @GetMapping("/{book}")
     public String getPageBook(@PathVariable Book book, Model model) {
+        model.addAttribute("genres",libraryService.getAllGenres());
         model.addAttribute("book", book);
         return "books";
     }
@@ -74,6 +80,40 @@ public class OrderController {
         model.addAttribute("startDate",order.getDate_start().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         model.addAttribute("endDate",order.getDate_end().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         return "infoOrder";
+    }
+    @GetMapping("/mindata")
+    @ResponseBody
+    public String[] getMinDate(@RequestParam Integer book_id){
+        List<LocalDate> dates=orderService.getMinDateOrder(book_id);
+        String[] disabledDates=new String[dates.size()];
+        for(int i=0;i<dates.size();i++){
+            disabledDates[i]=dates.get(i).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        }
+        return disabledDates;
+    }
+    @GetMapping("/maxdata")
+    @ResponseBody
+    public String getMaxDate(@RequestParam Integer book_id, @RequestParam String minDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        LocalDate date = LocalDate.parse(minDate, formatter);
+        LocalDate result=orderService.getMaxDateOrder(book_id,date);
+        if(result!=null){
+            return result.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        }
+        return null;
+    }
+    @GetMapping("/finduser")
+    @ResponseBody
+    public String findUser(@RequestParam String fio){
+        List<User> users=orderService.findUser(fio);
+        List<String> names=users.stream()
+                .map(x->{
+                    String[] strs=x.getFio().split(" ");
+                    String result=strs[0]+" "+strs[1].substring(0,1)+"."+" "+strs[2].substring(0,1)+"."+" "+x.getBirthday();
+                    return result;
+                })
+                .collect(Collectors.toList());
+        return names.toString();
     }
     private Model changeModel(Book book, Model model){
         model.addAttribute("textStartDate","Начальная дата:");
