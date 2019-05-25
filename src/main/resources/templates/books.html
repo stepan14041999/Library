@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
@@ -13,7 +16,6 @@
 
     <title>Книги</title>
 </head>
-<div>
     <header>
 
 
@@ -124,12 +126,6 @@
             </div>
         </div>
 
-
-</div>
-
-
-
-
 <div class="center-block-main">
 
 
@@ -205,7 +201,7 @@
         </div>
     </div>
 
-
+</div>
     <div class="header-bottom">
         <nav>
             <ul class="nav nav-pills menu">
@@ -239,14 +235,8 @@
         <div class="row">
             <div class="col-2">
                 <ul class="vertical-menu">
-                    <li>
-                        <a href="#">текст</a>
-                    <a href="#">текст</a>
-                    <a href="#">текст</a>
-                    <a href="#">текст</a><a>текст</a>
-                    <a href="#">текст</a>
-                    <a href="#">текст</a>
-
+                    <li th:each="genre:${genres}">
+                        <a th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}">текст</a>
                     </li>
                 </ul>
             </div>
@@ -276,7 +266,7 @@
                                     <div class="input-group date dateWidth" id="datetimepicker1" data-target-input="nearest">
                                         <label for="start" class="forLabel">Начальная дата:</label>
                                         <input type="text" name="date_start" id="start" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                        <div class="input-group-append" id="date1" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
                                     </div>
@@ -289,13 +279,11 @@
                                     <div class="input-group date dateWidth" id="datetimepicker2" data-target-input="nearest">
                                         <label for="end" class="forLabel">Конечная дата:</label>
                                         <input type="text" name="date_end" id="end" class="form-control" />
-                                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                        <div class="input-group-append" data-target="#datetimepicker2" id="date2" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="wrapForDate" id="user" sec:authorize="hasAuthority('LIBRARIAN')">
                                 <div class="form-group">
@@ -327,38 +315,23 @@
 </div>
 
 
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="../static/js/ruLocale.js" th:src="@{/js/ruLocale.js}"></script>
+
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>-->
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 
 
 
-
-
-
-
-
-
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.col').height($(document).height());
-        });
-    </script>
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-
-
-
-
-
+<!--<script type="text/javascript">-->
+    <!---->
+<!--</script>-->
 <script type="text/javascript">
     $(function () {
         $('#datetimepicker1').datetimepicker({
@@ -368,16 +341,12 @@
             daysOfWeekDisabled:[0,6]
         });
         $('#datetimepicker2').datetimepicker({
-            locale: 'ru',
+            locale: "ru",
             stepping:10,
             format: 'DD.MM.YYYY',
             daysOfWeekDisabled:[0,6]
         });
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#datetimepicker1').on('dp.show',function () {
+        $('#date1').on('click',function () {
             $id_book=$('#id').val();
             $.ajax({
                 type:'GET',
@@ -391,11 +360,9 @@
                 data:{book_id:$id_book,minDate:$minDate},
                 url:"../order/maxdata",
                 success:successMaxDate
-
             });
-
         });
-        $('#datetimepicker1').on('dp.change',function () {
+        $('#datetimepicker1').on('change.datetimepicker',function () {
             $id_book=$('#id').val();
             $minDate=$('#start').val();
             $.ajax({
@@ -403,10 +370,9 @@
                 data:{book_id:$id_book,minDate:$minDate},
                 url:"../order/maxdata",
                 success:successMaxDate
-
             });
         });
-        $('#datetimepicker2').on('dp.show',function () {
+        $('#date2').on('click',function () {
             $id_book=$('#id').val();
             $minDate=$('#start').val();
             $.ajax({
@@ -414,16 +380,16 @@
                 data:{book_id:$id_book,minDate:$minDate},
                 url:"../order/maxdata",
                 success:successMaxDate
-
             });
-
         });
     });
     function successMinDate(data) {
 
-        $('#datetimepicker1').data("DateTimePicker").disabledDates(data);
+        // $('#datetimepicker1').data("DateTimePicker").disabledDates(data);
+        $('#datetimepicker1').datetimepicker('disabledDates', data);
         var date=new Date();
-        $('#datetimepicker1').data("DateTimePicker").minDate(date.toLocaleString());
+        // $('#datetimepicker1').data("DateTimePicker").minDate(date.toLocaleString());
+        $('#datetimepicker1').datetimepicker('minDate', date.toLocaleString());
 
     }
     function successMaxDate(data) {
@@ -432,30 +398,27 @@
         myDate.setDate(myDate.getDate()+1);
 
         if(data!=null){
-            $('#datetimepicker2').data("DateTimePicker").maxDate(data);
+            // $('#datetimepicker2').data("DateTimePicker").maxDate(data);
+            $('#datetimepicker2').datetimepicker('maxDate', data);
             console.log(myDate.toLocaleString());
-            $('#datetimepicker2').data("DateTimePicker").date(myDate.toLocaleString());
-            $('#datetimepicker2').data("DateTimePicker").minDate(myDate.toLocaleString());
+            // $('#datetimepicker2').data("DateTimePicker").date(myDate.toLocaleString());
+            $('#datetimepicker2').datetimepicker('date', myDate.toLocaleString());
+            // $('#datetimepicker2').data("DateTimePicker").minDate(myDate.toLocaleString());
+            $('#datetimepicker2').datetimepicker('minDate', myDate.toLocaleString());
 
             return;
         }
         var date=new Date();
         date.setDate(date.getDate()+30);
-        $('#datetimepicker2').data("DateTimePicker").maxDate(date.toLocaleString());
-        $('#datetimepicker2').data("DateTimePicker").date(myDate.toLocaleString());
+        // $('#datetimepicker2').data("DateTimePicker").maxDate(date.toLocaleString());
+        $('#datetimepicker2').datetimepicker('maxDate', date.toLocaleString());
+        // $('#datetimepicker2').data("DateTimePicker").date(myDate.toLocaleString());
+        $('#datetimepicker2').datetimepicker('date', myDate.toLocaleString());
         console.log(myDate.toLocaleString());
-        $('#datetimepicker2').data("DateTimePicker").minDate(myDate.toLocaleString());
+        // $('#datetimepicker2').data("DateTimePicker").minDate(myDate.toLocaleString());
+        $('#datetimepicker2').datetimepicker('minDate', myDate.toLocaleString());
 
     }
 </script>
-
-
-
-
-
-
-
-
-
 </body>
 </html>

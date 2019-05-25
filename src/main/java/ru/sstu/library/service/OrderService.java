@@ -130,9 +130,9 @@ public class OrderService {
     public LocalDate getMaxDateOrder(Integer book_id,LocalDate minDate){
         Book book=bookRepo.findById(book_id).get();
         for(int i=0;i<MAX_COUNT_DAY_ORDER;i++){
-            Integer a=getCountOrder(minDate,book.getBook_id());
-            Integer b=book.getCountInLibrary();
-            boolean c=book.getCountInLibrary().equals(getCountOrder(minDate,book.getBook_id()));
+//            Integer a=getCountOrder(minDate,book.getBook_id());
+//            Integer b=book.getCountInLibrary();
+//            boolean c=book.getCountInLibrary().equals(getCountOrder(minDate,book.getBook_id()));
             if(book.getCountInLibrary()<=getCountOrder(minDate,book.getBook_id())){
                 return minDate;
             }
