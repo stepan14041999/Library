@@ -5,12 +5,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-    <link href="../static/css/book.css" th:href="@{/css/InfoOrder.css}" rel="stylesheet" />
+    <link href="../static/css/infoOrder.css" th:href="@{/css/InfoOrder.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
 
-    <title>Главная страница</title>
+    <title>Информация о бронировании</title>
 </head>
 <div>
     <header>
@@ -240,10 +240,10 @@
                 </div>
                 <div class="wrapTable">
                     <table class="tbl">
-                        <tr><td>Ваш номер заказа:</td> <td>123213123231</td></tr>
-                        <tr><td>Название книги:</td> <td>Война и мир</td></tr>
-                        <tr><td>Начало бронирования:</td> <td>23.06.2019</td></tr>
-                        <tr><td>Окончание бронирования:</td><td>28.06.2019</td></tr>
+                        <tr><td>Ваш номер заказа:</td> <td th:text="${order.getOrder_id()}"></td></tr>
+                        <tr><td>Название книги:</td> <td th:text="${order.getBook().getName()}"></td></tr>
+                        <tr><td>Начало бронирования:</td> <td th:text="${startDate}"></td></tr>
+                        <tr><td>Окончание бронирования:</td> <td th:text="${endDate}"></td></tr>
                     </table>
 
                 </div>
