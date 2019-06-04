@@ -396,7 +396,6 @@
         var text = $('#start').val().toString();
         var myDate = new Date(text.replace(/(\d+).(\d+).(\d+)/, '$3/$2/$1'));
         myDate.setDate(myDate.getDate()+1);
-
         if(data!=null){
             // $('#datetimepicker2').data("DateTimePicker").maxDate(data);
             $('#datetimepicker2').datetimepicker('maxDate', data);
@@ -405,7 +404,6 @@
             $('#datetimepicker2').datetimepicker('date', myDate.toLocaleString());
             // $('#datetimepicker2').data("DateTimePicker").minDate(myDate.toLocaleString());
             $('#datetimepicker2').datetimepicker('minDate', myDate.toLocaleString());
-
             return;
         }
         var date=new Date();

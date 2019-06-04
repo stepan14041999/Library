@@ -233,11 +233,18 @@
 
         <div class="slider1">
             <ul id="slides">
-                <li class="slide showing">Slide 1</li>
-                <li class="slide">Slide 2</li>
-                <li class="slide">Slide 3</li>
-                <li class="slide">Slide 4</li>
-                <li class="slide">Slide 5</li>
+                <li class="slide showing" th:text="${news.get(0).getTitle()}">
+                    <img class="card-img-top" th:src="'/img/'+${news.get(0).getImageNews().getLink()}"/>
+                </li>
+                <li class="slide" th:text="${news.get(1).getTitle()}">
+                    <img class="card-img-top" th:src="'/img/'+${news.get(1).getImageNews().getLink()}"/>
+                </li>
+                <li class="slide" th:text="${news.get(3).getTitle()}">
+                    <img class="card-img-top" th:src="'/img/'+${news.get(2).getImageNews().getLink()}"/>
+                </li>
+                <li class="slide" th:text="${news.get(3).getTitle()}">
+                    <img class="card-img-top" th:src="'/img/'+${news.get(3).getImageNews().getLink()}"/>
+                </li>
             </ul>
         </div>
 
