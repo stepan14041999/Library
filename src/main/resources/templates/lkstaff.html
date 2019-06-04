@@ -17,7 +17,7 @@
 
 
         <!-- Button trigger modal -->
-
+    
         <!-- авторизация -->
         <div class="modal fade" id="avt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -34,32 +34,32 @@
                                 <p th:if="${errorLogin!=''}" th:text="${errorLogin}"  id="messageLogin"></p>
                             </div>
                             <div class="form-label-group">
-                                <input type="text" name="username" class="form-control" placeholder="Логин" id="username" required autofocus >
-                                <label for="username">Логин</label>
-                            </div>
+                                      <input type="text" name="username" class="form-control" placeholder="Логин" id="username" required autofocus >
+                                        <label for="username">Логин</label>
+                                </div>
                             <div class="form-label-group">
-                                <input type="password" name="password"  class="form-control" placeholder="Пароль" id="password12" required autofocus>
+                                     <input type="password" name="password"  class="form-control" placeholder="Пароль" id="password12" required autofocus>
                                 <label for="password12">Пароль</label>
-                            </div>
+                                </div>
                             <div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Запомнить пароль</label>
                             </div>
-
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Войти</button>
-
-                            <p class="pass"><a th:href="@{/recoverPass}" class="recoverPass ">Забыли пароль?</a></p><!--Изменяем на "#close"-->
-
-
+    
+                                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Войти</button>
+    
+                                    <p class="pass"><a th:href="@{/recoverPass}" class="recoverPass ">Забыли пароль?</a></p><!--Изменяем на "#close"-->
+    
+    
                         </form>
                     </div>
+                    </div>
+    
                 </div>
-
             </div>
-        </div>
-
+    
         <!-- регистрация -->
-
+    
         <div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -72,9 +72,9 @@
                     <div class="modal-body">
                         <form  method="post" class="form-signin" th:action="@{/registration} ">
                             <div class="form-label-group">
-                                <p th:if="${errorRegistration}" th:text="${errorRegistration}" id="messageRegistration"></p>
+                            <p th:if="${errorRegistration}" th:text="${errorRegistration}" id="messageRegistration"></p>
                             </div>
-
+    
                             <div class="form-label-group">
                                 <input type="text" name="login" class="form-control" id="login" th:if="${user!=null}" th:value="${user.getLogin()}" placeholder="Логин" required autofocus>
                                 <label  th:if="${user!=null}" for="login" >Логин</label>
@@ -92,19 +92,19 @@
                                 <label th:if="${user==null}"   for="fio1">Фамилия Имя Отчество</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="email" name="email" class="form-control" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" placeholder="E - mail" required autofocus>
+                                 <input type="email" name="email" class="form-control" id="email" th:if="${user!=null}" th:value="${user.getEmail()}" placeholder="E - mail" required autofocus>
                                 <label th:if="${user!=null}"   for="email">E - mail</label>
-                                <input type="email" name="email" class="form-control" id="email1" th:if="${user==null}" placeholder="E - mail" required autofocus>
+                                  <input type="email" name="email" class="form-control" id="email1" th:if="${user==null}" placeholder="E - mail" required autofocus>
                                 <label for="email1" th:if="${user==null}"  >E - mail</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="date" name="birthday" class="form-control" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
+                                 <input type="date" name="birthday" class="form-control" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthday">
                                 <label th:if="${user!=null}" id="specialLabel1"   for="birthday">Дата рождения</label>
                                 <input type="date" name="birthday" class="form-control" th:if="${user==null}"  id="birthday1">
                                 <label id="specialLabel" for="birthday1" th:if="${user==null}">Дата рождения</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="number" name="phone_number" class="form-control" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
+                                 <input type="number" name="phone_number" class="form-control" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_number" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
                                 <label th:if="${user!=null}" for="phone_number"  >Номер телефона</label>
                                 <input type="number" name="phone_number"  class="form-control"th:if="${user==null}"  pattern="[0-9]{10}" id="phone_number1" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
                                 <label th:if="${user==null}" for="phone_number1"  >Номер телефона</label>
@@ -119,141 +119,148 @@
                         </form>
                     </div>
                 </div>
-
+    
             </div>
         </div>
-
-
-</div>
-
-
-
-
-<div class="center-block-main">
-
-
-    <div class="header-top clearfix">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-
-
-
-                    <p class ="h2"><a th:href="@{/}">LIBRARY</a></p>
-
-
-
-
-                </div>
-                <div class="col-sm">
-                    <div class="input-group search">
-                        <form th:action="@{/find}" method="post">
-                            <input type="text"  name="info" id="search_box"
-                                   placeholder="Введите название книги " autocomplete="off">
-                            <button class="btn btn-outline-secondary" type="submit">ИСКАТЬ</button>
-                        </form>
-
-
-                        <div id="search_advice_wrapper"></div>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="login">
-                        <div class="row">
-                            <div class="col">
+    
+    
+        </div>
+    
+    
+    
+    
+        <div class="center-block-main">
+    
+    
+            <div class="header-top clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+    
+    
+    
+                            <p class ="h2"><a th:href="@{/}">LIBRARY</a></p>
+    
+    
+    
+    
+                        </div>
+                        <div class="col-sm">
+                            <div class="input-group search">
+                                <form th:action="@{/find}" method="post">
+                                <input type="text"  name="info" id="search_box"
+                                       placeholder="Введите название книги " autocomplete="off">
+                                    <button class="btn btn-outline-secondary" type="submit">ИСКАТЬ</button>
+                                </form>
+    
+    
+                                <div id="search_advice_wrapper"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="login">
+                                    <div class="row">
+                                        <div class="col">
                                 <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" data-toggle="modal" data-target="#avt">
                                     Вход
                                 </button>
-                            </div>
-                            <div class="col">
+                                        </div>
+                                        <div class="col">
                                 <button type="button" sec:authorize="isAnonymous()" class="btn btn-primary" data-toggle="modal" data-target="#reg">
                                     Регистрация
                                 </button>
-                            </div>
-
-                            <form sec:authorize="hasAnyAuthority('USER')" th:action="@{/lk}">
-                                <div class="col">
+                                        </div>
+    
+                                <form sec:authorize="hasAnyAuthority('USER')" th:action="@{/lk}">
+                                    <div class="col">
                                     <button type="submit"  class="btn btn-primary" data-toggle="modal">
                                         Личный кабинет
                                     </button>
-                                </div>
-                            </form>
-
-
-                            <form sec:authorize="hasAnyAuthority('ADMIN','LIBRARIAN')" th:action="@{/lkstaff}">
-                                <div class="col">
+                                    </div>
+                                </form>
+    
+    
+                                <form sec:authorize="hasAnyAuthority('ADMIN','LIBRARIAN')" th:action="@{/lkstaff}">
+                                    <div class="col">
                                     <button type="submit" class="btn btn-primary" data-toggle="modal">
                                         Личный кабинет
                                     </button>
-                                </div>
-                            </form>
-
-
-                            <form sec:authorize="isAuthenticated()" th:action="@{/logout}">
-                                <div class="col">
+                                    </div>
+                                </form>
+    
+    
+                                <form sec:authorize="isAuthenticated()" th:action="@{/logout}">
+                                    <div class="col">
                                     <button type="submit" class="btn btn-primary" data-toggle="modal">
                                         Выйти
                                     </button>
+                                    </div>
+                                </form>
+    
                                 </div>
-                            </form>
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+    
+    
+            <div class="header-bottom">
+                <nav>
+                    <ul class="nav nav-pills menu">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Жанры</a>
+                            <ul class="dropdown-menu">
+                                <li th:each="genre:${genres}">
+                                <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Новинки</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Популярное</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Подборки</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+    
+            </header>
 
-    <div class="header-bottom">
+            <section sec:authorize="hasAuthority('ADMIN')">
+        <div class="header-bottom">
             <nav>
+                            <ul class="nav nav-pills menu">
+                                <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Добавить</a>
+                                    <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                        <li><a href="/addBook" class="dropdown-item">Добавить книгу</a></li>
+                                        <li><a href="/addAuthor" class="dropdown-item">Добавить автора</a></li>
+                                        <li><a href="/addGenre" class="dropdown-item">Добавить жанр</a></li>
+                                        <li><a href="/addNew" class="dropdown-item">Добавить новость</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a href="/libraries" class="nav-link">Список библиотекарей</a></li>
+                                <li class="nav-item"><a href="/registrationLibrarian" class="nav-link">Регистрация библиотекоря</a></li>
+                                <li class="nav-item"><a href="/users" class="nav-link">Информация о просроченных бронях</a></li>
+                            </ul>
+                        </nav>
+            </div>
+        </section>
+       
+                <section sec:authorize="hasAuthority('LIBRARIAN')">
+        
+            <div class="header-bottom">
+                <nav>
                 <ul class="nav nav-pills menu">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Жанры</a>
-                        <ul class="dropdown-menu">
-                            <li th:each="genre:${genres}">
-                            <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Новинки</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Популярное</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Подборки</a>
-                    </li>
+                    <li class="nav-item"><a th:href="@{/listOrders}" class="nav-link">Список бронирований</a></li>
+                    <li class="nav-item"><a th:href="@{/registration}" class="nav-link">Регистрация пользователя</a></li>
                 </ul>
             </nav>
         </div>
-  
-    </header>
-
-    <section sec:authorize="hasAuthority('ADMIN')">
-            <nav id="menu1">
-                <ul>
-                    <li><a href="#">Добавить</a>
-                        <ul>
-                            <li><a th:href="@{/addBook}">Добавить книгу</a></li>
-                            <li><a th:href="@{/addAuthor}">Добавить автора</a></li>
-                            <li><a th:href="@{/addGenre}">Добавить жанр</a></li>
-                            <li><a th:href="@{/addNew}">Добавить новость</a></li>
-                        </ul>
-                    </li>
-                    <li><a th:href="@{/libraries}">Список библиотекарей</a></li>
-                    <li><a th:href="@{/registrationLibrarian}">Регистрация библиотекоря</a></li>
-                    <li><a th:href="@{/users}">Информация о просроченных бронях</a></li>
-                </ul>
-            </nav><!--menu1-->
-        </section>
-        <section sec:authorize="hasAuthority('LIBRARIAN')">
-            <nav id="menu1">
-                <ul>
-                    <li><a th:href="@{/listOrders}">Список бронирований</a></li>
-                    <li><a th:href="@{/registration}">Регистрация пользователя</a></li>
-                </ul>
-            </nav><!--menu1-->
         </section>
         <main>
             <div class="mainDiv">
@@ -317,6 +324,16 @@
                 </div>
             </div>
         </main>
+</div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#search_box").keyup(function(I){

@@ -62,19 +62,7 @@ h2{
 a {
     text-decoration: none;
 }
-nav a {
-    position: relative;
-    display: inline-block;
-    margin: 15px 25px;
-    outline: none;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 400;
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
-    font-size: 1.35em;
-}
+
 table {
     
     font-size: 14px;
@@ -318,4 +306,13 @@ select{
 #menu1 ul li ul li a:hover{
     background: #D4D8D9;
     color: #808285;
+}
+section .header-bottom{
+    padding:20px 0;
+    border:0;
+}
+section .menu{
+    
+    border:0;
+    font-size: 21.8px;
 }
