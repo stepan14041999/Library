@@ -310,7 +310,7 @@
                                 <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Добавить</a>
                                     <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
                                         <li><a href="/addBook" class="dropdown-item">Добавить книгу</a></li>
-                                        <li><a href="/addAuthor" class="dropdown-item">Добавить автора</a></li>
+                                        <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#addAuthor">Добавить автора</a></li>
                                         <li><a a href="#" class="dropdown-item" data-toggle="modal" data-target="#addGenre">Добавить жанр</a></li>
                                         <li><a href="/addNew" class="dropdown-item">Добавить новость</a></li>
                                     </ul>
@@ -431,6 +431,40 @@
         </div>
     </div>
 
+    <!-- Добавить автора -->
+<div class="modal fade" id="addAuthor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title">Добавить автора</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <form th:action="@{/addAuthor}" method="post" class="ui-form">
+                            <div class="form-label-group">
+                            <p th:if="${error}" class="message">Автор с такими параметрами уже существует!</p>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="text" class="form-control" name="fioA" id="fioA" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                                <label for="fioA">Фамилия Имя Отчество</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="date" class="form-control"  name="birthdayA" id="birthdayA" required>
+                                <label id="specialLabel" for="birthdayA">Дата рождения</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="date" class="form-control" name="dieA" id="dieA">
+                                <label for="dieA">Дата окончания жизни</label>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Добавить автора</button>
+                        </form>
+                </div>
+                </div>
+    
+            </div>
+        </div>
 
 
 
