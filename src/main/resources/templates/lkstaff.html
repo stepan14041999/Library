@@ -123,6 +123,78 @@
             </div>
         </div>
     
+<!-- регистрация библиотекаря-->
+    
+<div class="modal fade" id="regL" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Регистрация библиотекаря</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  method="post" class="form-signin" th:action="@{/registrationLibrarian} ">
+                    <div class="form-label-group">
+                    <p th:if="${errorRegistrationLibrarian}" th:text="${errorRegistrationLibrarian}" id="messageRegistrationLibrarian"></p>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="text" name="loginL" class="form-control" id="loginL" th:if="${user!=null}" th:value="${user.getLogin()}" placeholder="Логин" required autofocus>
+                        <label  th:if="${user!=null}" for="loginL" >Логин</label>
+                        <input type="text" name="loginL" class="form-control" id="loginL1" th:if="${user==null}" placeholder="Логин" required autofocus>
+                        <label for="loginL1" th:if="${user==null}" >Логин</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="password" name="passwordL" class="form-control" id="passwordL" pattern=".{8,}"  placeholder="Пароль" required autofocus title="8 символов  минимум">
+                        <label for="passwordL"  >Пароль</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" name="fioL"  class="form-control" id="fioL" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
+                        <label th:if="${user!=null}"   for="fioL">Фамилия Имя Отчество</label>
+                        <input type="text" name="fioL" class="form-control" id="fioL1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
+                        <label th:if="${user==null}"   for="fioL1">Фамилия Имя Отчество</label>
+                    </div>
+                    <div class="form-label-group">
+                         <input type="email" name="emailL" class="form-control" id="emailL" th:if="${user!=null}" th:value="${user.getEmail()}" placeholder="E - mail" required autofocus>
+                        <label th:if="${user!=null}"   for="emailL">E - mail</label>
+                          <input type="email" name="emailL" class="form-control" id="emailL1" th:if="${user==null}" placeholder="E - mail" required autofocus>
+                        <label for="emailL1" th:if="${user==null}"  >E - mail</label>
+                    </div>
+                    <div class="form-label-group">
+                         <input type="date" name="birthdayL" class="form-control" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthdayL">
+                        <label th:if="${user!=null}" id="specialLabel1"   for="birthdayL">Дата рождения</label>
+                        <input type="date" name="birthdayL" class="form-control" th:if="${user==null}"  id="birthdayL1">
+                        <label id="specialLabel" for="birthdayL1" th:if="${user==null}">Дата рождения</label>
+                    </div>
+                    <div class="form-label-group">
+                         <input type="number" name="phone_numberL" class="form-control" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_numberL" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
+                        <label th:if="${user!=null}" for="phone_numberL"  >Номер телефона</label>
+                        <input type="number" name="phone_numberL"  class="form-control"th:if="${user==null}"  pattern="[0-9]{10}" id="phone_numberL1" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
+                        <label th:if="${user==null}" for="phone_numberL1"  >Номер телефона</label>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="text" name="addressL" id="addressL" class="form-control" th:if="${user!=null}" th:value="${user.getAddress()}" placeholder="Адрес проживания" required autofocus autocomplete="off">
+                        <label th:if="${user!=null}" for="addressL"  >Адрес проживания</label>
+                        <input type="text" name="addressL" id="addressL1" class="form-control" th:if="${user==null}" placeholder="Адрес проживания" required autofocus autocomplete="off">
+                        <label for="addressL1" th:if="${user==null}"  >Адрес проживания</label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Зарегистрировать</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
     
         </div>
     
@@ -239,12 +311,12 @@
                                     <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
                                         <li><a href="/addBook" class="dropdown-item">Добавить книгу</a></li>
                                         <li><a href="/addAuthor" class="dropdown-item">Добавить автора</a></li>
-                                        <li><a href="/addGenre" class="dropdown-item">Добавить жанр</a></li>
+                                        <li><a a href="#" class="dropdown-item" data-toggle="modal" data-target="#addGenre">Добавить жанр</a></li>
                                         <li><a href="/addNew" class="dropdown-item">Добавить новость</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a href="/libraries" class="nav-link">Список библиотекарей</a></li>
-                                <li class="nav-item"><a href="/registrationLibrarian" class="nav-link">Регистрация библиотекоря</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#regL">Регистрация библиотекаря</a></li>
                                 <li class="nav-item"><a href="/users" class="nav-link">Информация о просроченных бронях</a></li>
                             </ul>
                         </nav>
@@ -325,6 +397,55 @@
             </div>
         </main>
 </div>
+
+
+
+
+
+<!-- Добавить жанр -->
+<div class="modal fade" id="addGenre" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить жанр</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <form th:action="@{/addGenre}" method="post" class="ui-form">
+
+                        <div class="form-label-group">
+                        <p th:if="${error}" class="message">Жанр с таким именем уже существует!</p>
+                    </div>
+
+                        <div class="form-label-group">
+                                <input type="text" name="nameG" class="form-control" placeholder="Логин" id="nameG" required autofocus >
+                                  <label for="nameG">Название жанра</label>
+                          </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Добавить жанр</button>
+                    </form>
+            </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
 
 
 
