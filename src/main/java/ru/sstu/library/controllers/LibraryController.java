@@ -28,6 +28,19 @@ public class LibraryController {
         return "index";
 
     }
+
+    @GetMapping("/popular")
+    public String popular(Model model){
+        model.addAttribute("books",libraryService.getPopular());
+        return "genres";
+    }
+
+    @GetMapping("/new")
+    public String newBooks(Model model){
+        model.addAttribute("books",libraryService.getLastTenBooks());
+        return "genres";
+    }
+
     @GetMapping("/test")
     public String test(){
         return "test";

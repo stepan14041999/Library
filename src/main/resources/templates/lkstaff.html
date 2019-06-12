@@ -54,13 +54,12 @@
                         </form>
                     </div>
                     </div>
-    
                 </div>
             </div>
     
         <!-- регистрация -->
     
-        <div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="regU" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -309,15 +308,13 @@
                             <ul class="nav nav-pills menu">
                                 <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Добавить</a>
                                     <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                        <li><a href="/addBook" class="dropdown-item">Добавить книгу</a></li>
                                         <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#addAuthor">Добавить автора</a></li>
                                         <li><a a href="#" class="dropdown-item" data-toggle="modal" data-target="#addGenre">Добавить жанр</a></li>
-                                        <li><a href="/addNew" class="dropdown-item">Добавить новость</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a a href="#" class="nav-link" data-toggle="modal" data-target="#libraries">Список библиотекарей</a></li>
                                 <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#regL">Регистрация библиотекаря</a></li>
-                                <li class="nav-item"><a href="/users" class="nav-link">Информация о просроченных бронях</a></li>
+                                <<li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#overdue">Информация о просроченных бронированиях</a></li>
                             </ul>
                         </nav>
             </div>
@@ -328,8 +325,9 @@
             <div class="header-bottom">
                 <nav>
                 <ul class="nav nav-pills menu">
-                    <li class="nav-item"><a th:href="@{/listOrders}" class="nav-link">Список бронирований</a></li>
-                    <li class="nav-item"><a th:href="@{/registration}" class="nav-link">Регистрация пользователя</a></li>
+                    <li class="nav-item"><a a href="#" class="nav-link" data-toggle="modal" data-target="#orders">Список бронирований</a></li>
+                    <li class="nav-item"><a a href="#" class="nav-link" data-toggle="modal" data-target="#ordersComplete">Завершенные бронирования</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#regU">Регистрация пользователя</a></li>
                 </ul>
             </nav>
         </div>
@@ -349,7 +347,7 @@
                             <table th:if="${ordersActive.size()>0}">
                                 <tr>
                                     <th>Номер заказа</th>
-                                    <th>ФИЩ заказчика</th>
+                                    <th>ФИО заказчика</th>
                                     <th>Дата начала заказа</th>
                                     <th>Дата окончания заказ</th>
                                     <th>Название книги</th>
@@ -420,7 +418,7 @@
                     </div>
 
                         <div class="form-label-group">
-                                <input type="text" name="nameG" class="form-control" placeholder="Логин" id="nameG" required autofocus >
+                                <input type="text" name="name" class="form-control" placeholder="Логин" id="nameG" required autofocus >
                                   <label for="nameG">Название жанра</label>
                           </div>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Добавить жанр</button>
@@ -447,15 +445,15 @@
                             <p th:if="${error}" class="message">Автор с такими параметрами уже существует!</p>
                             </div>
                             <div class="form-label-group">
-                                <input type="text" class="form-control" name="fioA" id="fioA" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
+                                <input type="text" class="form-control" name="fio" id="fioA" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" required title="Возможно вы пропустили пробел между ФИО">
                                 <label for="fioA">Фамилия Имя Отчество</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="date" class="form-control"  name="birthdayA" id="birthdayA" required>
+                                <input type="date" class="form-control"  name="birthday" id="birthdayA" required>
                                 <label id="specialLabel" for="birthdayA">Дата рождения</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="date" class="form-control" name="dieA" id="dieA">
+                                <input type="date" class="form-control" name="die" id="dieA">
                                 <label for="dieA">Дата окончания жизни</label>
                             </div>
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Добавить автора</button>
@@ -486,18 +484,12 @@
                                                 <th>Номер телефона</th>
                                                 <th>Адрес проживания</th>
                                                 <th></th>
-                                                <th></th>
                                             </tr>
                                             <tr th:each="librarian:${allLibraries}">
                                                 <td th:text="${librarian.getFio()}"></td>
                                                 <td th:text="${librarian.getBirthday()}"></td>
                                                 <td th:text="${librarian.getPhone_number()}"></td>
                                                 <td th:text="${librarian.getAddress()}"></td>
-                                                <td>
-                                                    <div class="cl-effect-4">
-                                                        <a class="editLibr" th:href="'/edit/'+${librarian.getUser_id()}">Корректировать информацию</a>
-                                                    </div>
-                                                </td>
                                                 <td>
                                                     <form th:action="@{/delete}" method="post" onsubmit="return confirm('Подтвердить выполнение действия?');">
                                                         <input type="hidden" th:value="${librarian.getUser_id()}" name="idUser">
@@ -514,6 +506,137 @@
         
                 </div>
             </div>
+<!-- Список библиотекарей -->
+<div class="modal fade" id="orders" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title">Список библиотекарей</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <main>
+                    <table th:if="${orders.size()>0}">
+                        <tr>
+                            <th>Номер заказа</th>
+                            <th>ФИЩ заказчика</th>
+                            <th>Дата начала заказа</th>
+                            <th>Дата окончания заказ</th>
+                            <th>Название книги</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr th:each="order:${orders}">
+                            <td th:text="${order.getOrder_id()}"></td>
+                            <td th:text="${order.getUser().getFio()}"></td>
+                            <td th:text="${order.getDate_start()}"></td>
+                            <td th:text="${order.getDate_end()}"></td>
+                            <td th:text="${order.getBook().getName()}"></td>
+                            <td>
+                                <form th:action="@{/activateOrder}" method="post" onsubmit="return confirm('Подтвердить выполнение действия?');">
+                                    <input type="hidden" th:value="${order.getOrder_id()}" name="idOrder">
+                                    <input type="submit" value="Выдать книгу">
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/cancelOrder}" method="post" onsubmit="return confirm('Подтвердить выполнение действия?');">
+                                    <input type="hidden" th:value="${order.getOrder_id()}" name="idOrder">
+                                    <input type="submit" value="Отменить бронирование">
+                                </form>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </main>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Список библиотекарей -->
+<div class="modal fade" id="overdue" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title">Список библиотекарей</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <main>
+                    <table>
+                        <tr>
+                            <th>Номер пользователя</th>
+                            <th>ФИО пользователя</th>
+                            <th>Количество просроченных бронирований</th>
+                            <th></th>
+                        </tr>
+                        <tr th:each="user:${usersExpired}">
+                            <td th:text="${user.getKey().getUser_id()}"></td>
+                            <td th:text="${user.getKey().getFio()}"></td>
+                            <td th:text="${user.getValue()}"></td>
+                            <td>
+                                <form th:action="@{/blockUser}" method="post" onsubmit="return confirm('Подтвердить выполнение действия?');">
+                                    <input type="hidden" th:value="${user.getKey().getUser_id()}" name="idUser">
+                                    <input type="submit" value="Заблокировать пользователя">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+
+                </main>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- завершенные брони -->
+<div class="modal fade" id="ordersComplete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog1" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title">Список библиотекарей</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <main>
+                    <table th:if="${ordersComplete.size()>0}">
+                        <tr>
+                            <th>Номер заказа</th>
+                            <th>ФИО заказчика</th>
+                            <th>Дата начала заказа</th>
+                            <th>Дата окончания заказ</th>
+                            <th>Название книги</th>
+                        </tr>
+                        <tr th:each="order:${ordersComplete}">
+                            <td th:text="${order.getOrder_id()}"></td>
+                            <td th:text="${order.getUser().getFio()}"></td>
+                            <td th:text="${order.getDate_start()}"></td>
+                            <td th:text="${order.getDate_end()}"></td>
+                            <td th:text="${order.getBook().getName()}"></td>
+                        </tr>
+                    </table>
+
+                </main>
+
+            </div>
+        </div>
+
+    </div>
+</div>
 
 
 
