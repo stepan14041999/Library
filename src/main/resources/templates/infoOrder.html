@@ -212,18 +212,15 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Жанры</a>
                     <ul class="dropdown-menu">
                         <li th:each="genre:${genres}">
-                            <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
+                        <a class="dropdown-item" th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Новинки</a>
+                    <a class="nav-link" th:href="@{/new}">Новинки</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Популярное</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Подборки</a>
+                    <a class="nav-link" th:href="@{/popular}">Популярное</a>
                 </li>
             </ul>
         </nav>

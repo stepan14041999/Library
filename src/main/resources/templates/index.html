@@ -240,8 +240,10 @@
                     <img class="d-block w-100" th:src="@{/image/new1.jpg}" alt="Первый слайд">
                     <div class="carousel-caption d-none d-md-block">
                         <a href="#"> 
-                            <h2 class="tp1">Новость</h2>
-                                <p class="tp1">Описание описание описание описание описание  описание описание описание описание описание описание описание описание описание  </p>
+                            <h2 class="tp1">Журнальный лабиринт</h2>
+                                <p class="tp1">Литературные, научно-популярные, культурно-просветительские, общественно-
+                                    политические, деловые — целый мир серьезной периодики...
+                                    </p>
                                 </a>
                           </div>
                   </div>
@@ -249,8 +251,11 @@
                         <img class="d-block w-100" th:src="@{/image/new2.jpg}" alt="Первый слайд">
                         <div class="carousel-caption d-none d-md-block">
                             <a href="#"> 
-                                <h2 class="tp1">Новость</h2>
-                                    <p class="tp1">Описание описание описание описание описание описание описание описание описание  </p>
+                                <h2 class="tp1">Рассказы, стихи, очерки, письма. Редакция о новой книге
+                                    </h2>
+                                    <p class="tp1">Наша новая книга — о Великой Отечественной войне. Пожалуй, никогда еще мы не работали с таким сложным материалом.
+                                        Сложным с точки зрения именно человеческой. Нам пришлось
+...</p>
                                     </a>
                               </div>
                   </div>
@@ -258,8 +263,11 @@
                         <img class="d-block w-100" th:src="@{/image/new3.jpg}" alt="Первый слайд">
                         <div class="carousel-caption d-none d-md-block">
                                 <a href="#"> 
-                                        <h2 class="tp1">Новость</h2>
-                                            <p class="tp1">Описание описание описание описание описание описание описание описание описание  </p>
+                                        <h2 class="tp1">Карнеги, Хилл: Общайся так, чтобы тебя слышали, слушали и слушались!
+                                            </h2>
+                                            <p class="tp1">Два бестселлера в одной книге!
+                                                Вы хотите научиться разговаривать так, чтобы собеседник полностью проникся вашей идеей? Вы хотите, чтобы о вас говорили как о привлекательном человеке? Деловые переговоры, выступления
+                                                ... </p>
                                             </a>
                               </div>
                   </div>
@@ -356,7 +364,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   
 
 
 
@@ -366,11 +374,6 @@
 
 
     <script type="text/javascript">
-
-
-$('.carousel').carousel({
-  interval: 2000
-})
 var uscont = $('#messageLogin').text();
 if (uscont.trim().length != 0) {
     $('#avt').modal('show')
@@ -380,6 +383,11 @@ var uscont1 = $('#messageRegistration').text();
 if (uscont1.trim().length != 0) {
     $('#reg').modal('show')
 }
+
+$('.carousel').carousel({
+  interval: 2000
+})
+
 
 </script>
 <script type="text/javascript">
@@ -486,6 +494,7 @@ if (uscont1.trim().length != 0) {
             }
         }
     }
+
 </script>
 
 
