@@ -5,7 +5,15 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, 
 	outline: 0;                               /* обнуляем отступы и убираем бордюры */
 	vertical-align: baseline;          /* приводим все к одной базовой линии */
 	background: transparent;      /* чтобы не проскакивали левые фоны, установленные по умолчанию */
-	font-size: 100%;                     /* размер шрифта всем одинаковый */
+  font-size: 100%;
+  list-style-type: none;
+	                 
+	                 /* размер шрифта всем одинаковый */
+}
+element.style {
+.fa-search:before {
+    content: none;
+}
 }
     *::before,
     *::after {
@@ -116,6 +124,9 @@ img{
     font-size:1.475em;
 
 }
+
+
+
 .search{
 
 
@@ -123,17 +134,35 @@ img{
 .search input {
 
     height: 42px;
+        width: 250px;
     padding-left: 10px;
     border: 2px solid #f45a40;
     outline: none;
+    border-radius: 0.4rem;
+
 
 }
 .search button {
     border-color:#f45a40;
+    border-radius: 0.4rem;
+    height:43px;
+    border:0px;
     background: #f45a40;
     cursor: pointer;
     color:#eee;
+    margin-bottom:3px;
 }
+.search button:hover{
+
+    background: #ed3c1e;
+    cursor: pointer;
+    color:#fff;
+}
+
+
+
+
+
 .col-sm .login .col{
 padding:0 3px;
 }
@@ -164,74 +193,35 @@ float:right;
 color:#7e7f84;
 text-decoration:none;
 }
-.menu li a:hover{
+.nav-link:hover {
 color:#f45a40;
 }
-.slider1{
-padding:10px 0;
+
+.tp1{
+  color: #fff;
+  font-size: 30px;
+  text-decoration:inherit;
+  
 }
-#slides{
-    position: relative;
-    height: 400px;
-    padding: 0px;
-    margin: 0px;
-    list-style-type: none;
+a h2.tp1{
+	color:#fff;
+}
+a p.tp1{
+	font-size: 17px;
+	color: #fff;
 }
 
-.slide{
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    z-index: 1;
-
-    -webkit-transition: opacity 1s;
-    -moz-transition: opacity 1s;
-    -o-transition: opacity 1s;
-    transition: opacity 1s;
-}
-
-.showing{
-    opacity: 1;
-    z-index: 2;
-}
-
-.slide{
-    font-size: 40px;
-    padding: 40px;
-    box-sizing: border-box;
-    background: #333;
-    color: #fff;
-}
-
-.slide:nth-of-type(1){
-    background: red;
-}
-.slide:nth-of-type(2){
-    background: orange;
-}
-.slide:nth-of-type(3){
-    background: green;
-}
-.slide:nth-of-type(4){
-    background: blue;
-}
-.slide:nth-of-type(5){
-    background: purple;
-}
 
 
 
 .block-section{
-margin-bottom:60px;
+padding-top:30px;
 }
 .block-section > h2{
-text-align:left;
+text-align:center;
 font-family: 'Roboto Condensed', sans-serif;
 color:#67686d;
-font-size:1.375em;
+font-size:1.600em;
 margin-bottom:20px;
 }
 .block-main{
@@ -479,6 +469,21 @@ margin:10px 0;
 .line{
 border-top:1px solid #eee;
 }
+.card{
+  border: 0;
+}
+.card-title {
+  color: #215388;
+  text-align: center;
+  margin-bottom: .75rem;
+}
+.card-img-top {
+  margin: auto;
+  width: 80%;
+  border-top-left-radius: calc(.25rem - 1px);
+  border-top-right-radius: calc(.25rem - 1px);
+  text-align: center;
+}
 
 .card .carousel-item {
  height: 200px;
@@ -523,7 +528,7 @@ a:hover > .ico {
 }
 
 .b1 {
-    height: calc(15vh - 72px);
+    height: calc(20vh - 72px);
     flex:1;
     overflow: hidden;
 }
@@ -543,6 +548,24 @@ a:hover > .ico {
   --input-padding-x: 1.5rem;
   --input-padding-y: .75rem;
 }
+
+
+
+
+.modal-dialog1 {
+
+  max-width: 800px;
+
+
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -643,3 +666,241 @@ font-weight: 300;
   text-align:center;
   padding-top:12px;
 }
+
+
+
+
+
+
+
+
+#search_advice_wrapper2{
+    display:none;
+    width: 230px;
+    background-color: rgb(80, 80, 114);
+    color: rgb(255, 227, 189);
+    -moz-opacity: 0.95;
+    opacity: 0.95;
+    -ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter:alpha(opacity=95);
+    z-index:999;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+}
+
+#search_advice_wrapper2 .advice_variant{
+    cursor: pointer;
+    padding: 5px;
+    text-align: left;
+}
+#search_advice_wrapper2 .advice_variant:hover{
+    color:#FEFFBD;
+    background-color:#818187;
+}
+#search_advice_wrapper2 .active{
+    cursor: pointer;
+    padding: 5px;
+    color:#FEFFBD;
+    background-color:#818187;
+}
+
+#search_box{
+
+}
+
+#search_advice_wrapper{
+    display:none;
+    width: 250px;
+    background-color: #f45a40;
+    color: #fff;
+    -moz-opacity: 0.95;
+    opacity: 0.95;
+    -ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=95);
+    filter:alpha(opacity=95);
+    z-index:999;
+    position: absolute;
+    top: 41px;
+    left: 0px;
+}
+
+#search_advice_wrapper .advice_variant{
+    cursor: pointer;
+    padding: 5px;
+    text-align: left;
+}
+#search_advice_wrapper .advice_variant:hover{
+
+    background-color:#ed3c1e;
+}
+#search_advice_wrapper .active{
+    cursor: pointer;
+    padding: 5px;
+    color:#fff;
+    background-color:z ;
+}
+
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #f45a40;;
+  border-color: #f45a40;;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #ed3c1e;
+  border-color: #ed3c1e;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  box-shadow: 0 0 0 0 #f45a40;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  color: #fff;
+  background-color: #f45a40;
+  border-color: #f45a40;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #ed3c1e;
+  border-color: #ed3c1e;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0 #ed3c1e;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #ed3c1e;
+}
+
+
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color:#fff;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+ color:#fff;
+  text-decoration: none;
+  background-color: #f45a40;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #f45a40;
+}
+
+.dropdown-item.disabled, .dropdown-item:disabled {
+  color: #6c757d;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:focus, .btn-outline-secondary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+.btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
+  color: #6c757d;
+  background-color: transparent;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .btn-outline-secondary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-secondary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+.btn1 {
+  color: #7e7f84;
+  background-color: transparent;
+  background-image: none;
+  border-color: #7e7f84;
+  text-decoration:none;
+}
+.btn1>a{
+  text-decoration:none;
+  color: #7e7f84;
+}
+.btn1:hover {
+  color: #f;
+  background-image: none;
+  border-color: #f45a40;
+  text-decoration:none;
+}
+.btn1:hover>a{
+  color: #f45a40;
+  text-decoration:none;
+}
+
+.btn2{
+  color: #fff;
+  background-color: #7e7f84;
+  background-image: none;
+  text-decoration:none;
+}
+.btn2>a{
+  color: #fff;
+  text-decoration:none; 
+}
+.btn2:hover {
+  color: #fff;
+  background-color: transparent;
+  background-image: none;
+  background-color: #f45a40;
+  text-decoration:none;
+}
+.btn2:hover>a {
+  color: #fff;
+  text-decoration:none;
+}
+
+
+.card-title > a{
+  color:#7e7f84;
+}
+
+
+
+
+
+
+
+

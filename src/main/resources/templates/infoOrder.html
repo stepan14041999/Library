@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
-    <link href="../static/css/genres.css" th:href="@{/css/genres.css}" rel="stylesheet" />
+    <link href="../static/css/infoOrder.css" th:href="@{/css/InfoOrder.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
 
-    <title>Жанры</title>
+    <title>Информация о бронировании</title>
 </head>
 <div>
     <header>
@@ -230,44 +232,25 @@
     </header>
 
 
-
-    <div class="container" >
-        <div class="row">
-            <div class="col-2">
-                            <ul class="vertical-menu">
-                                <li th:each="genre:${genres}">
-                                    <a th:href="'/genre/'+${genre.getGenre_id()}"  th:text="${genre.getName()}"></a>
-                                </li>
-                            </ul>
-                        </div>
-
-
-            <div class="col-10">
-    <section class="block-section">
-    <div class="container">
-        <div class="row mt-4" >
-            <div class="col-sm-4 my-3" th:each="book:${books}" >
-                <div class="card">
-                    <img class="card-img-top" th:src="'/img/'+${book.getImage().getLink()}"  alt="">
-                    <div class="card-body">
-                        <p class="card-title h4">
-                            <a th:text="${book.getName()}" th:href="'/order/'+${book.getBook_id()}"></a>
-                        </p>
-
-                        <div class="text-center line">
-                            <p class="btn btn1 btn-lg btn-block"><a  th:href="'/order/'+${book.getBook_id()}">Забронировать</a></p>
-                            <button type="button" class="btn btn2 btn-lg btn-block">В избранное</button>
-                        </div>
-                    </div>
+    <main>
+        <div class="mainDiv">
+            <div class="wrapForOrder">
+                <div class="wrapForTitle">
+                    <div class="d16news"><h3><span>Информация о бронировании</span></h3></div>
                 </div>
+                <div class="wrapTable">
+                    <table class="tbl">
+                        <tr><td>Ваш номер заказа:</td> <td th:text="${order.getOrder_id()}"></td></tr>
+                        <tr><td>Название книги:</td> <td th:text="${order.getBook().getName()}"></td></tr>
+                        <tr><td>Начало бронирования:</td> <td th:text="${startDate}"></td></tr>
+                        <tr><td>Окончание бронирования:</td> <td th:text="${endDate}"></td></tr>
+                    </table>
+
+                </div>
+
             </div>
         </div>
-    </div>
-
-    </section>
-        </div>
-        </div>
-    </div>
+    </main>
 </div>
 
 
@@ -276,128 +259,135 @@
 
 
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
 
 
 
 
-<script type="text/javascript">
 
-if (uscont.trim().length != 0) {
-  $('#avt').modal('show')
-}
 
-var uscont1 = $('#messageRegistration').html();
-if (uscont1.trim().length != 0) {
-  $('#reg').modal('show')
-}
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        console.log("heloooo!!!!!!!")
-        $("#search_box").keyup(function(I){
-            // определяем какие действия нужно делать при нажатии на клавиатуру
-            switch(I.keyCode) {
-                // игнорируем нажатия на эти клавишы
-                case 13:  // enter
-                case 27:  // escape
-                case 38:  // стрелка вверх
-                case 40:  // стрелка вниз
-                    break;
-                default:
-                    // производим поиск только при вводе более 2х символов
-                    if($(this).val().length>2){
-                        input_initial_value = $(this).val();
-                        // производим AJAX запрос к /ajax/ajax.php, передаем ему GET query, в который мы помещаем наш запрос
-                        $.ajax({
-                            type:'GET',
-                            data:{info:$(this).val()},
-                            url:"/find",
-                            success:addPromting
-                        });
-                    }
-                    break;
-            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.col').height($(document).height());
         });
-        //считываем нажатие клавишь, уже после вывода подсказки
-        $("#search_box").keydown(function(I){
-            switch(I.keyCode) {
-                // по нажатию клавишь прячем подсказку
-                case 13: // enter
-                case 27: // escape
-                    $('#search_advice_wrapper').hide();
-                    return false;
-                    break;
-                // делаем переход по подсказке стрелочками клавиатуры
-                case 38: // стрелка вверх
-                case 40: // стрелка вниз
-                    I.preventDefault();
-                    if(suggest_count){
-                        //делаем выделение пунктов в слое, переход по стрелочкам
-                        key_activate( I.keyCode-39 );
-                    }
-                    break;
-            }
+    </script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+
+
+
+    <script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            locale: 'ru',
+            stepping:10,
+            format: 'DD.MM.YYYY',
+            daysOfWeekDisabled:[0,6]
         });
-        // делаем обработку клика по подсказке
-        $('#search_advice_wrapper').on('click','div',function(){
-            $('#search_box').val($(this).text());
-            // прячем слой подсказки
-            $('#search_advice_wrapper').fadeOut(350).html('');
-        });
-        // если кликаем в любом месте сайта, нужно спрятать подсказку
-        $('html').click(function(){
-            $('#search_advice_wrapper').hide();
-        });
-        // если кликаем на поле input и есть пункты подсказки, то показываем скрытый слой
-        $('#search_box').click(function(event){
-            // alert(suggest_count);
-            if(suggest_count)
-                $('#search_advice_wrapper').show();
-            event.stopPropagation();
+        $('#datetimepicker2').datetimepicker({
+            locale: 'ru',
+            stepping:10,
+            format: 'DD.MM.YYYY',
+            daysOfWeekDisabled:[0,6]
         });
     });
-    function key_activate(n){
-        $('#search_advice_wrapper div').eq(suggest_selected-1).removeClass('active');
-        if(n == 1 && suggest_selected < suggest_count){
-            suggest_selected++;
-        }else if(n == -1 && suggest_selected > 0){
-            suggest_selected--;
-        }
-        if( suggest_selected > 0){
-            $('#search_advice_wrapper div').eq(suggest_selected-1).addClass('active');
-            $("#search_box").val( $('#search_advice_wrapper div').eq(suggest_selected-1).text() );
-        } else {
-            $("#search_box").val( input_initial_value );
-        }
+</script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#datetimepicker1').on('dp.show',function () {
+            $id_book=$('#id').val();
+            $.ajax({
+                type:'GET',
+                data:{book_id:$id_book},
+                url:"../order/mindata",
+                success:successMinDate
+            });
+            $minDate=$('#start').val();
+            $.ajax({
+                type:'GET',
+                data:{book_id:$id_book,minDate:$minDate},
+                url:"../order/maxdata",
+                success:successMaxDate
+
+            });
+
+        });
+        $('#datetimepicker1').on('dp.change',function () {
+            $id_book=$('#id').val();
+            $minDate=$('#start').val();
+            $.ajax({
+                type:'GET',
+                data:{book_id:$id_book,minDate:$minDate},
+                url:"../order/maxdata",
+                success:successMaxDate
+
+            });
+        });
+        $('#datetimepicker2').on('dp.show',function () {
+            $id_book=$('#id').val();
+            $minDate=$('#start').val();
+            $.ajax({
+                type:'GET',
+                data:{book_id:$id_book,minDate:$minDate},
+                url:"../order/maxdata",
+                success:successMaxDate
+
+            });
+
+        });
+    });
+    function successMinDate(data) {
+
+        $('#datetimepicker1').data("DateTimePicker").disabledDates(data);
+        var date=new Date();
+        $('#datetimepicker1').data("DateTimePicker").minDate(date.toLocaleString());
+
     }
-    function addPromting(data){
-        //php скрипт возвращает нам строку, ее надо распарсить в массив.
-        // возвращаемые данные: ['test','test 1','test 2','test 3']
-        var list = data.toString().substring(1, data.toString().length-1);
-        if(list.indexOf(",")<=0){
-            $("#search_advice_wrapper").html("").show();
-            $('#search_advice_wrapper').append('<div class="advice_variant" name="adv">'+list+'</div>');
-            suggest_count=1;
+    function successMaxDate(data) {
+        var text = $('#start').val().toString();
+        var myDate = new Date(text.replace(/(\d+).(\d+).(\d+)/, '$3/$2/$1'));
+        myDate.setDate(myDate.getDate()+1);
+
+        if(data!=null){
+            $('#datetimepicker2').data("DateTimePicker").maxDate(data);
+            console.log(myDate.toLocaleString());
+            $('#datetimepicker2').data("DateTimePicker").date(myDate.toLocaleString());
+            $('#datetimepicker2').data("DateTimePicker").minDate(myDate.toLocaleString());
+
             return;
         }
-        var res=list.split(", ");
-        suggest_count = res.length;
-        if(suggest_count > 0){
-            // перед показом слоя подсказки, его обнуляем
-            $("#search_advice_wrapper").html("").show();
-            for(var i in res){
-                if(res[i] != ''){
-                    // добавляем слою позиции
-                    if(i>5) return;
-                    $('#search_advice_wrapper').append('<div class="advice_variant">'+res[i]+'</div>');
-                }
-            }
-        }
+        var date=new Date();
+        date.setDate(date.getDate()+30);
+        $('#datetimepicker2').data("DateTimePicker").maxDate(date.toLocaleString());
+        $('#datetimepicker2').data("DateTimePicker").date(myDate.toLocaleString());
+        console.log(myDate.toLocaleString());
+        $('#datetimepicker2').data("DateTimePicker").minDate(myDate.toLocaleString());
+
     }
 </script>
 
@@ -407,5 +397,7 @@ if (uscont1.trim().length != 0) {
 
 
 
-</body>
+
+
+    </body>
 </html>

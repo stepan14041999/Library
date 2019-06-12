@@ -54,7 +54,12 @@ public class LibraryService {
                 .map(x->x.getBook())
                 .distinct()
                 .collect(Collectors.toList());
-
+        if(books.size()==0){
+            books=(List<Book>) bookRepo.findAll();
+            books=books.stream()
+                    .limit(6)
+                    .collect(Collectors.toList());
+        }
         return books;
     }
     public List<Book> getLastTenBooks()
