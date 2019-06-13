@@ -2,11 +2,14 @@ package ru.sstu.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sstu.library.entities.Book;
 import ru.sstu.library.entities.News;
 import ru.sstu.library.entities.Order;
+import ru.sstu.library.entities.User;
 import ru.sstu.library.repos.NewsRepo;
 import ru.sstu.library.repos.OrderRepo;
 import ru.sstu.library.repos.StateRepo;
+import ru.sstu.library.repos.UserRepo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,52 +23,67 @@ public class LibrarianService {
     private NewsRepo newsRepo;
     @Autowired
     private StateRepo stateRepo;
+    @Autowired
+    private UserRepo userRepo;
 
-    public Order findOrderById(Integer idOrder){
+    public Order findOrderById(Integer idOrder) {
         return orderRepo.findById(idOrder).get();
     }
 
-    public Order changeActive(Order order){
+    public Order changeActive(Order order) {
         order.setState(stateRepo.findByName("Complete"));
         return orderRepo.save(order);
     }
 
-    public List<Order> getActiveOrders(){
-        List<Order> orderList= (List<Order>) orderRepo.findAll();
-        orderList=orderList.stream()
-                .filter(x->x.getState().equals(stateRepo.findByName("Active")))
-                .sorted((x,y)->-x.getOrder_id()-y.getOrder_id())
-                .collect(Collectors.toList());
-        return orderList;
-    }
-    public List<Order> getCompleteOrders(){
-        List<Order> orderList= (List<Order>) orderRepo.findAll();
-        orderList=orderList.stream()
-                .filter(x->x.getState().equals(stateRepo.findByName("Complete")))
+    public List<Order> getActiveOrders() {
+        List<Order> orderList = (List<Order>) orderRepo.findAll();
+        orderList = orderList.stream()
+                .filter(x -> x.getState().equals(stateRepo.findByName("Active")))
+                .sorted((x, y) -> -x.getOrder_id() - y.getOrder_id())
                 .collect(Collectors.toList());
         return orderList;
     }
 
-    public News addNews(News news){
+    public List<Order> getCompleteOrders() {
+        List<Order> orderList = (List<Order>) orderRepo.findAll();
+        orderList = orderList.stream()
+                .filter(x -> x.getState().equals(stateRepo.findByName("Complete")))
+                .collect(Collectors.toList());
+        return orderList;
+    }
+
+    public News addNews(News news) {
         news.setDate_publish(LocalDate.now());
         return newsRepo.save(news);
     }
 
-    public List<Order> getBookedOrders(){
-        List<Order> orderList=(List<Order>)orderRepo.findAll();
-        orderList=orderList.stream()
-                .filter(x->x.getState().equals(stateRepo.findByName("Booked")))
-                .sorted((x,y)->x.getDate_start().compareTo(y.getDate_start()))
+    public List<Order> getBookedOrders() {
+        List<Order> orderList = (List<Order>) orderRepo.findAll();
+        orderList = orderList.stream()
+                .filter(x -> x.getState().equals(stateRepo.findByName("Booked")))
+                .sorted((x, y) -> x.getDate_start().compareTo(y.getDate_start()))
                 .collect(Collectors.toList());
         return orderList;
     }
 
-    public void cancelOrder(Integer idOrder){
+    public void cancelOrder(Integer idOrder) {
         orderRepo.deleteById(idOrder);
     }
 
-    public Order activateOrder(Integer idOrder){
-        Order order=orderRepo.findById(idOrder).get();
+    public User addFavorites(User user, Book book) {
+        User userFromDB = userRepo.findById(user.getUser_id()).get();
+        if(userFromDB.getBooksFavorites().contains(book)){
+            return null;
+        }
+        else {
+            userFromDB.getBooksFavorites().add(book);
+        }
+        userRepo.save(userFromDB);
+        return userFromDB;
+    }
+
+    public Order activateOrder(Integer idOrder) {
+        Order order = orderRepo.findById(idOrder).get();
         order.setState(stateRepo.findByName("Active"));
         return orderRepo.save(order);
     }

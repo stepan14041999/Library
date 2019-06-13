@@ -32,12 +32,14 @@ public class LibraryController {
     @GetMapping("/popular")
     public String popular(Model model){
         model.addAttribute("books",libraryService.getPopular());
+        model.addAttribute("genres",libraryService.getAllGenres());
         return "genres";
     }
 
     @GetMapping("/new")
     public String newBooks(Model model){
         model.addAttribute("books",libraryService.getLastTenBooks());
+        model.addAttribute("genres",libraryService.getAllGenres());
         return "genres";
     }
 
@@ -55,7 +57,8 @@ public class LibraryController {
 //    }
     @GetMapping("/InfoOrder")
     public String testImage1(Model model){
-
         return "InfoOrder";
     }
+
+
 }

@@ -7,10 +7,7 @@ import ru.sstu.library.entities.Book;
 import ru.sstu.library.entities.Genre;
 import ru.sstu.library.entities.Order;
 import ru.sstu.library.entities.User;
-import ru.sstu.library.repos.GenreRepo;
-import ru.sstu.library.repos.OrderRepo;
-import ru.sstu.library.repos.StateRepo;
-import ru.sstu.library.repos.UserRepo;
+import ru.sstu.library.repos.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,6 +23,8 @@ public class LkService {
     private UserRepo userRepo;
     @Autowired
     private StateRepo stateRepo;
+    @Autowired
+    private BookRepo bookRepo;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -76,6 +75,14 @@ public class LkService {
     public User changePass(Integer idUser,String password){
         User user=userRepo.findById(idUser).get();
         user.setPassword(bCryptPasswordEncoder.encode(password));
+        return userRepo.save(user);
+    }
+
+    public User deleteFavorite(User user,Integer idBook){
+        user=userRepo.findById(user.getUser_id()).get();
+        List<Book> books=(List<Book>)user.getBooksFavorites();
+        books.remove(bookRepo.findById(idBook).get());
+        user.setBooksFavorites(books);
         return userRepo.save(user);
     }
 }

@@ -253,7 +253,9 @@
 
                         <div class="text-center line">
                             <p class="btn btn1 btn-lg btn-block"><a  th:href="'/order/'+${book.getBook_id()}">Забронировать</a></p>
-                            <button type="button" class="btn btn2 btn-lg btn-block">В избранное</button>
+                            <form th:action="'/favorites/'+${book.getBook_id()}" method="get">
+                                <button type="submit" class="btn btn2 btn-lg btn-block" sec:authorize="${!hasAuthority('ADMIN')}" >В избранное</button>
+                            </form>
                         </div>
                     </div>
                 </div>
