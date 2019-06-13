@@ -1,6 +1,7 @@
 package ru.sstu.library.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,4 +36,18 @@ public class RegistrationController {
         registrationService.saveUser(user);
         return "redirect:/";
     }
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/registrationLibrarian")
+    public String addLibraries(User user,Model model){
+        if(libraryService.getUserByLogin(user.getLogin())!=null){
+            model.addAttribute("message",true);
+            return "redirect:/lkstaff";
+        }
+        user.setRole(libraryService.getRoleByName("LIBRARIAN"));
+        user.setPassword(encoder.encode(user.getPassword()));
+        libraryService.saveUser(user);
+        model.addAttribute("success","Вы зарегистрировали библиотекоря!!!");
+        return "redirect:/lkstaff";
+    }
+
 }

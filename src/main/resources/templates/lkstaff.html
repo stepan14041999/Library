@@ -140,43 +140,43 @@
                     </div>
 
                     <div class="form-label-group">
-                        <input type="text" name="loginL" class="form-control" id="loginL" th:if="${user!=null}" th:value="${user.getLogin()}" placeholder="Логин" required autofocus>
+                        <input type="text" name="login" class="form-control" id="loginL" th:if="${user!=null}" th:value="${user.getLogin()}" placeholder="Логин" required autofocus>
                         <label  th:if="${user!=null}" for="loginL" >Логин</label>
-                        <input type="text" name="loginL" class="form-control" id="loginL1" th:if="${user==null}" placeholder="Логин" required autofocus>
+                        <input type="text" name="login" class="form-control" id="loginL1" th:if="${user==null}" placeholder="Логин" required autofocus>
                         <label for="loginL1" th:if="${user==null}" >Логин</label>
                     </div>
                     <div class="form-label-group">
-                        <input type="password" name="passwordL" class="form-control" id="passwordL" pattern=".{8,}"  placeholder="Пароль" required autofocus title="8 символов  минимум">
+                        <input type="password" name="password" class="form-control" id="passwordL" pattern=".{8,}"  placeholder="Пароль" required autofocus title="8 символов  минимум">
                         <label for="passwordL"  >Пароль</label>
                     </div>
                     <div class="form-label-group">
-                        <input type="text" name="fioL"  class="form-control" id="fioL" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
+                        <input type="text" name="fio"  class="form-control" id="fioL" th:if="${user!=null}" th:value="${user.getFio()}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
                         <label th:if="${user!=null}"   for="fioL">Фамилия Имя Отчество</label>
-                        <input type="text" name="fioL" class="form-control" id="fioL1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
+                        <input type="text" name="fio" class="form-control" id="fioL1" th:if="${user==null}" pattern="[а-яА-Я]+ [а-яА-Я]+ [а-яА-Я]+" placeholder="Фамилия Имя Отчество" required autofocus title="Возможно вы пропустили пробел между ФИО">
                         <label th:if="${user==null}"   for="fioL1">Фамилия Имя Отчество</label>
                     </div>
                     <div class="form-label-group">
-                         <input type="email" name="emailL" class="form-control" id="emailL" th:if="${user!=null}" th:value="${user.getEmail()}" placeholder="E - mail" required autofocus>
+                         <input type="email" name="email" class="form-control" id="emailL" th:if="${user!=null}" th:value="${user.getEmail()}" placeholder="E - mail" required autofocus>
                         <label th:if="${user!=null}"   for="emailL">E - mail</label>
-                          <input type="email" name="emailL" class="form-control" id="emailL1" th:if="${user==null}" placeholder="E - mail" required autofocus>
+                          <input type="email" name="email" class="form-control" id="emailL1" th:if="${user==null}" placeholder="E - mail" required autofocus>
                         <label for="emailL1" th:if="${user==null}"  >E - mail</label>
                     </div>
                     <div class="form-label-group">
-                         <input type="date" name="birthdayL" class="form-control" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthdayL">
+                         <input type="date" name="birthday" class="form-control" th:if="${user!=null}" th:value="${user.getBirthday()}" id="birthdayL">
                         <label th:if="${user!=null}" id="specialLabel1"   for="birthdayL">Дата рождения</label>
-                        <input type="date" name="birthdayL" class="form-control" th:if="${user==null}"  id="birthdayL1">
+                        <input type="date" name="birthday" class="form-control" th:if="${user==null}"  id="birthdayL1">
                         <label id="specialLabel" for="birthdayL1" th:if="${user==null}">Дата рождения</label>
                     </div>
                     <div class="form-label-group">
-                         <input type="number" name="phone_numberL" class="form-control" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_numberL" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
+                         <input type="number" name="phone_number" class="form-control" th:if="${user!=null}" th:value="${user.getPhone_number()}" pattern="[0-9]{10}" id="phone_numberL" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
                         <label th:if="${user!=null}" for="phone_numberL"  >Номер телефона</label>
-                        <input type="number" name="phone_numberL"  class="form-control"th:if="${user==null}"  pattern="[0-9]{10}" id="phone_numberL1" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
+                        <input type="number" name="phone_number"  class="form-control"th:if="${user==null}"  pattern="[0-9]{10}" id="phone_numberL1" placeholder="Номер телефона" required autofocus title="Длина должна быть 10 цифр">
                         <label th:if="${user==null}" for="phone_numberL1"  >Номер телефона</label>
                     </div>
                     <div class="form-label-group">
-                        <input type="text" name="addressL" id="addressL" class="form-control" th:if="${user!=null}" th:value="${user.getAddress()}" placeholder="Адрес проживания" required autofocus autocomplete="off">
+                        <input type="text" name="address" id="addressL" class="form-control" th:if="${user!=null}" th:value="${user.getAddress()}" placeholder="Адрес проживания" required autofocus autocomplete="off">
                         <label th:if="${user!=null}" for="addressL"  >Адрес проживания</label>
-                        <input type="text" name="addressL" id="addressL1" class="form-control" th:if="${user==null}" placeholder="Адрес проживания" required autofocus autocomplete="off">
+                        <input type="text" name="address" id="addressL1" class="form-control" th:if="${user==null}" placeholder="Адрес проживания" required autofocus autocomplete="off">
                         <label for="addressL1" th:if="${user==null}"  >Адрес проживания</label>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Зарегистрировать</button>

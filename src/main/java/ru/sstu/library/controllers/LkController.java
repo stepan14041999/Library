@@ -60,7 +60,9 @@ public class LkController {
     @PostMapping("/cancelOrder")
     public String cancelOrder(@AuthenticationPrincipal User user,@RequestParam(name = "idOrder") Integer idOrder){
         librarianService.cancelOrder(idOrder);
-
+        if(user.getRole().equals(lkService.getRoleByName("USER"))){
+            return "redirect:/lk";
+        }
         return "redirect:/lkstaff";
     }
     @PreAuthorize("isAuthenticated()")
@@ -135,7 +137,7 @@ public class LkController {
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     public String deleteUser(@RequestParam Integer idUser,Model model){
         adminService.deleteUser(idUser);
-        return "redirect:/libraries";
+        return "redirect:/lkstaff";
     }
 
     @GetMapping("/favorites/{book}")

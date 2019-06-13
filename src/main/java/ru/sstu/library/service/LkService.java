@@ -3,10 +3,7 @@ package ru.sstu.library.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.sstu.library.entities.Book;
-import ru.sstu.library.entities.Genre;
-import ru.sstu.library.entities.Order;
-import ru.sstu.library.entities.User;
+import ru.sstu.library.entities.*;
 import ru.sstu.library.repos.*;
 
 import java.time.LocalDate;
@@ -26,6 +23,8 @@ public class LkService {
     @Autowired
     private BookRepo bookRepo;
     @Autowired
+    private RoleRepo roleRepo;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
@@ -38,6 +37,12 @@ public class LkService {
         orders.sort((x,y)->x.getOrder_id().compareTo(y.getOrder_id()));
         return orders;
     }
+
+    public Role getRoleByName(String name){
+        return roleRepo.findByName(name);
+    }
+
+
     public List<Order> getOrderActive(User user){
         List<Order> orders=(List<Order>) orderRepo.findAll();
         orders=orders.stream()

@@ -2,17 +2,10 @@ package ru.sstu.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.sstu.library.entities.Book;
-import ru.sstu.library.entities.Genre;
-import ru.sstu.library.entities.News;
-import ru.sstu.library.entities.Order;
-import ru.sstu.library.repos.BookRepo;
-import ru.sstu.library.repos.GenreRepo;
-import ru.sstu.library.repos.NewsRepo;
-import ru.sstu.library.repos.OrderRepo;
+import ru.sstu.library.entities.*;
+import ru.sstu.library.repos.*;
 
 import ru.sstu.library.entities.Book;
-import ru.sstu.library.repos.SetRepo;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -29,6 +22,10 @@ public class LibraryService {
     private SetRepo setRepo;
     @Autowired
     private BookRepo bookRepo;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private RoleRepo roleRepo;
 
     public List<News> getAllNews(){
         List<News> news=(List<News>) newsRepo.findAll();
@@ -41,6 +38,19 @@ public class LibraryService {
         genres.sort(Comparator.comparing(Genre::getName));
         return genres;
     }
+
+    public User getUserByLogin(String login){
+        return userRepo.findByLogin(login);
+    }
+
+    public User saveUser(User user){
+        return userRepo.save(user);
+    }
+
+    public Role getRoleByName(String name){
+        return roleRepo.findByName(name);
+    }
+
     public List<Book> getPopular(){
         List<Order> orderList=(List<Order>) orderRepo.findAll();
         List<Book> books;
